@@ -20,32 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveClient.Web", "Source\WaveClient.Web\WaveClient.Web.csproj", "{3D91563E-A562-4379-85D5-20127F3BA78E}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://oslo:8080/tfs/DefaultCollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = WaveServer\\WaveServer.csproj
-		SccProjectTopLevelParentUniqueName1 = WaveNET.sln
-		SccProjectName1 = WaveServer
-		SccLocalPath1 = WaveServer
-		SccProjectUniqueName2 = WaveClient\\WaveClient.csproj
-		SccProjectTopLevelParentUniqueName2 = WaveNET.sln
-		SccProjectName2 = WaveClient
-		SccLocalPath2 = WaveClient
-		SccProjectUniqueName3 = WaveClient.Web\\WaveClient.Web.csproj
-		SccProjectTopLevelParentUniqueName3 = WaveNET.sln
-		SccProjectName3 = WaveClient.Web
-		SccLocalPath3 = WaveClient.Web
-		SccProjectUniqueName4 = WaveNET.Core\\WaveNET.Core.csproj
-		SccProjectTopLevelParentUniqueName4 = WaveNET.sln
-		SccProjectName4 = WaveNET.Core
-		SccLocalPath4 = WaveNET.Core
-		SccProjectUniqueName5 = Tests\\WaveServerTests\\WaveServerTests.csproj
-		SccProjectTopLevelParentUniqueName5 = WaveNET.sln
-		SccProjectName5 = Tests/WaveServerTests
-		SccLocalPath5 = Tests\\WaveServerTests
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
