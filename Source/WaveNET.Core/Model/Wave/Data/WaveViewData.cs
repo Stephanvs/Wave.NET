@@ -14,7 +14,7 @@ namespace WaveNET.Core.Model.Wave.Data
 	public class WaveViewData : IWaveViewData
 	{
 		private WaveId _waveId;
-		private Dictionary<WaveletId, WaveletData> _wavelets;
+		private Dictionary<WaveletId, IWaveletData> _wavelets;
 
 		/// <summary>
 		/// Creates a new instance of the <see cref="WaveViewData"/> class.
@@ -23,7 +23,7 @@ namespace WaveNET.Core.Model.Wave.Data
 		public WaveViewData(WaveId waveId)
 		{
 			this._waveId = waveId;
-			this._wavelets = new Dictionary<WaveletId, WaveletData>();
+			this._wavelets = new Dictionary<WaveletId, IWaveletData>();
 		}
 
 		public WaveId GetWaveId()
@@ -33,7 +33,7 @@ namespace WaveNET.Core.Model.Wave.Data
 
 		public IEnumerable<IWaveletData> GetWavelets()
 		{
-			return new ReadOnlyCollection<WaveletData>(_wavelets.Values.ToList());
+			return new ReadOnlyCollection<IWaveletData>(_wavelets.Values.ToList());
 		}
 
 		public IWaveletData GetWavelet(WaveletId waveletId)
@@ -44,8 +44,8 @@ namespace WaveNET.Core.Model.Wave.Data
 		public IWaveletData CreateWavelet(WaveletId waveletId)
 		{
 			Contract.Requires(!_wavelets.ContainsKey(waveletId), "Duplicate wavelet id: " + waveletId);
-			
-			WaveletData wavelet = new WaveletData(this._waveId, waveletId);
+
+			IWaveletData wavelet = new WaveletData(this._waveId, waveletId);
 			_wavelets.Add(waveletId, wavelet);
 
 			return wavelet;

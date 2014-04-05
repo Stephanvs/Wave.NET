@@ -48,9 +48,13 @@ namespace WaveNET.Core.Model.Wave
 		public override bool Equals(object obj)
 		{
 			if (obj == this) return true;
-			else if (obj is ParticipantId) return ((ParticipantId)obj)._address.Equals(this._address);
+			else
+			{
+			    var id = obj as ParticipantId;
+			    if (id != null) return id._address.Equals(_address);
+			}
 
-			return false;
+		    return false;
 		}
 
 		public override int GetHashCode()

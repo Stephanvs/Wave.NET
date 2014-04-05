@@ -1,28 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using WaveNET.Core.Model.Wave.Data;
 
 namespace WaveNET.Core.Model.Operation.Wave
 {
     public abstract class WaveletOperation
-        : IReversableOperation<WaveletOperation, WaveletData>
-        , IVisitable<IWaveletOperationVisitor>
+        : IReversableOperation<WaveletOperation, IWaveletData>
+            , IVisitable<IWaveletOperationVisitor>
     {
+        public WaveletOperation(WaveletOperationContext context)
+        {
+            Contract.Requires(Context != null);
+
+            Context = context;
+        }
+
         /// <summary>
         ///     Context metadata which does not affect the logic of an operation.
         /// </summary>
-        protected readonly WaveletOperationContext Context;
-
-        public WaveletOperation(WaveletOperationContext context)
-        {
-            Context = context;
-        }
+        public WaveletOperationContext Context { get; private set; }
 
         /// <summary>
         ///     This method delegates the operation logic to <see cref="DoApply(WaveletData)" />
         /// </summary>
         /// <param name="wavelet"></param>
-        public void Apply(WaveletData wavelet)
+        public void Apply(IWaveletData wavelet)
         {
             // Execute subtype logic first, because if the subtype logic throws an exception, we must
             // leave this wrapper untouched as though the operation never happened. The subtype is
@@ -36,13 +38,26 @@ namespace WaveNET.Core.Model.Operation.Wave
             Update(wavelet);
         }
 
-        public abstract IList<WaveletOperation> ApplyAndReturnReverse(WaveletData target);
+        public abstract IList<WaveletOperation> ApplyAndReturnReverse(IWaveletData target);
 
         public abstract void AcceptVisitor(IWaveletOperationVisitor visitor);
 
-        public void Update(WaveletData wavelet)
+        public void Update(IWaveletData wavelet)
         {
-            throw new NotImplementedException();
+            if (Context.HasTimestamp)
+            {
+                wavelet.LastModifiedTime = Context.Timestamp;
+            }
+
+            if (Context.VersionIncrement != 0)
+            {
+                wavelet.Version = wavelet.Version + Context.VersionIncrement;
+            }
+
+            if (Context.HasHashedVersion)
+            {
+                wavelet.HashedVersion = Context.HashedVersion;
+            }
         }
 
         /// <summary>
@@ -50,18 +65,31 @@ namespace WaveNET.Core.Model.Operation.Wave
         ///     arbitrarily overridden by subclasses.
         /// </summary>
         /// <param name="wavelet">Wavelet on which this operation is to apply itself</param>
-        protected abstract void DoApply(WaveletData wavelet);
-
-        /// <summary>
-        ///     Get the inverse of the operation, such that any <see cref="WaveletData" />
-        ///     object applying this operation followed by its inverse will remain unchanged.
-        /// </summary>
-        /// <returns>The inverse of this operation</returns>
-        public abstract WaveletOperation GetInverse();
+        protected abstract void DoApply(IWaveletData wavelet);
 
         protected virtual string SuffixForToString()
         {
             return string.Format("by {0} at {1} version {2}", Context.Creator, Context.Timestamp, Context.HashedVersion);
+        }
+
+        protected WaveletOperationContext CreateReverseContext(IWaveletData target, long versionDecrement)
+        {
+            return new WaveletOperationContext(Context.Creator, Context.LastModifiedTime, -versionDecrement,
+                target.HashedVersion);
+        }
+
+        protected WaveletOperationContext CreateReverseContext(IWaveletData target)
+        {
+            return CreateReverseContext(target, Context.VersionIncrement);
+        }
+
+        /// <summary>
+        ///     Whether this operation worthy of attribution. Subclasses may override this.
+        /// </summary>
+        /// <returns>This default implementation always returns true.</returns>
+        public virtual bool IsWorthyOfAttribution()
+        {
+            return true;
         }
     }
 }
