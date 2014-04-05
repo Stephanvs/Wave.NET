@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{3F8F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{67A87332-44AA-4771-8F4D-B70C7E59A5A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveServerTests", "Tests\WaveServerTests\WaveServerTests.csproj", "{09F3AF53-9D70-40F5-B140-80C3A774782B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveNET.Tests", "Tests\WaveServerTests\WaveNET.Tests.csproj", "{09F3AF53-9D70-40F5-B140-80C3A774782B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveNET.Core", "Source\WaveNET.Core\WaveNET.Core.csproj", "{5853A40B-6757-49F2-8C0B-67EE10073B77}"
 EndProject

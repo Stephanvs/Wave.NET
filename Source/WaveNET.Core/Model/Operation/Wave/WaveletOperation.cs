@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using WaveNET.Core.Model.Wave.Data;
+using WaveNET.Core.Utils;
 
 namespace WaveNET.Core.Model.Operation.Wave
 {
@@ -10,7 +11,7 @@ namespace WaveNET.Core.Model.Operation.Wave
     {
         public WaveletOperation(WaveletOperationContext context)
         {
-            Contract.Requires(Context != null);
+            Preconditions.CheckNotNull(context);
 
             Context = context;
         }

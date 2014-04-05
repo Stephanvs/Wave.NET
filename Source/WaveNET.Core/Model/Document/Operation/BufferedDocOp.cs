@@ -114,10 +114,10 @@ namespace WaveNET.Core.Model.Document.Operation
 
         private void Check(int i, DocOpComponentType type)
         {
-            Contract.Requires(
-                _components[i].GetType() == type,
-                String.Format("Component {0} is not of type '{1}' it is of type ''", i, type, _components[i].GetType())
-                );
+            //Contract.Requires(
+            //    _components[i].GetType() == type,
+            //    String.Format("Component {0} is not of type '{1}' it is of type ''", i, type, _components[i].GetType())
+            //    );
         }
 
         #region Overrides
@@ -138,7 +138,7 @@ namespace WaveNET.Core.Model.Document.Operation
             BufferedDocOp op = CreateUnchecked(components);
             CheckWellformedness(op);
 
-            Contract.Ensures(op._knownToBeWellFormed);
+            //Contract.Ensures(op._knownToBeWellFormed);
             return op;
         }
 
@@ -156,8 +156,8 @@ namespace WaveNET.Core.Model.Document.Operation
                 DocOpValidator.IsWellformed(violationCollector, value);
 
                 // Execution should not reach this point, because the DocOpValidator should return to caller
-                Contract.Ensures(true,
-                    String.Format("Attempt to build ill-formed operation ({0}): {1}", violationCollector, value));
+                //Contract.Ensures(true,
+                //    String.Format("Attempt to build ill-formed operation ({0}): {1}", violationCollector, value));
             }
         }
 

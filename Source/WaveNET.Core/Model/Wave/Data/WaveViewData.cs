@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using WaveNET.Core.Model.Id;
+using WaveNET.Core.Utils;
 
 namespace WaveNET.Core.Model.Wave.Data
 {
@@ -42,7 +43,7 @@ namespace WaveNET.Core.Model.Wave.Data
 
         public IWaveletData CreateWavelet(WaveletId waveletId)
         {
-            Contract.Requires(!_wavelets.ContainsKey(waveletId), "Duplicate wavelet id: " + waveletId);
+            //Contract.Requires(!_wavelets.ContainsKey(waveletId), "Duplicate wavelet id: " + waveletId);
 
             throw new NotImplementedException();
             //IWaveletData wavelet = new WaveletData(_waveId, waveletId);
@@ -53,7 +54,7 @@ namespace WaveNET.Core.Model.Wave.Data
 
         public void RemoveWavelet(WaveletId waveletId)
         {
-            Contract.Ensures(_wavelets.Remove(waveletId), waveletId + " is not present");
+            //Contract.Ensures(_wavelets.Remove(waveletId), waveletId + " is not present");
         }
     }
 }

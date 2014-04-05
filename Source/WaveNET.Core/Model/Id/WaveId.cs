@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using WaveNET.Core.Utils;
 
 namespace WaveNET.Core.Model.Id
 {
@@ -16,8 +17,8 @@ namespace WaveNET.Core.Model.Id
         /// <param name="id">Id must not be null. This is assumed to be escaped with SimplePrefixEscaper.DefaultEscaper.</param>
         public WaveId(string domain, string id)
         {
-            Contract.Requires(!string.IsNullOrEmpty(domain), "The parameter 'domain' cannot be null");
-            Contract.Requires(!string.IsNullOrEmpty(id), "The parameter 'id' cannot be null");
+            Preconditions.CheckNotNull(domain, "The parameter 'domain' cannot be null");
+            Preconditions.CheckNotNull(id, "The parameter 'id' cannot be null");
 
             // todo: some stuff here, see: http://code.google.com/p/wave-protocol/source/browse/src/org/waveprotocol/wave/model/id/WaveId.java
             //if (SimplePrefixEscaper.DEFAULT_ESCAPER.hasEscapeCharacters(domain))
