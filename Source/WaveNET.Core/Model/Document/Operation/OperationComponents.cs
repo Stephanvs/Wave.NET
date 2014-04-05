@@ -14,8 +14,6 @@ namespace WaveNET.Core.Model.Document.Operation
         {
             Apply(cursor);
         }
-
-        public abstract void Apply(IDocInitializationCursor cursor);
     }
 
     public class AnnotationBoundary : DocInitializationComponent
@@ -37,7 +35,7 @@ namespace WaveNET.Core.Model.Document.Operation
             return DocOpComponentType.AnnotationBoundary;
         }
 
-        public override void Apply(IDocInitializationCursor cursor)
+        public override void Apply(IDocOpCursor cursor)
         {
             cursor.AnnotationBoundary(_boundary);
         }
@@ -62,7 +60,7 @@ namespace WaveNET.Core.Model.Document.Operation
             return DocOpComponentType.Characters;
         }
 
-        public override void Apply(IDocInitializationCursor cursor)
+        public override void Apply(IDocOpCursor cursor)
         {
             cursor.Characters(_characters);
         }
@@ -94,7 +92,7 @@ namespace WaveNET.Core.Model.Document.Operation
             return DocOpComponentType.ElementStart;
         }
 
-        public override void Apply(IDocInitializationCursor cursor)
+        public override void Apply(IDocOpCursor cursor)
         {
             cursor.ElementStart(_type, _attributes);
         }
@@ -109,7 +107,7 @@ namespace WaveNET.Core.Model.Document.Operation
             return DocOpComponentType.ElementEnd;
         }
 
-        public override void Apply(IDocInitializationCursor cursor)
+        public override void Apply(IDocOpCursor cursor)
         {
             cursor.ElementEnd();
         }
