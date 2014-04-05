@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Document\Bootstrap\BootstrapDocument.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\ComposeException.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\Composer.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\DocOpInverter.cs" />
     <Compile Include="Model\Document\Operation\Automation\IAutomationDocument.cs" />
     <Compile Include="Model\Document\Operation\Automation\ViolationCollector.cs" />

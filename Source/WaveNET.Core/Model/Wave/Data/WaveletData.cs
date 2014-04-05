@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics.Contracts;
 using System.Collections.ObjectModel;
+using WaveNET.Core.Model.Document.Operation.Algorithm;
 using WaveNET.Core.Model.Id;
 using WaveNET.Core.Model.Document.Operation;
 
@@ -17,7 +18,7 @@ namespace WaveNET.Core.Model.Wave.Data
 		/// <summary>
 		/// A document (operation) with no contents.
 		/// </summary>
-		private static IBufferedDocOp Empty = new DocOpBuffer().Finish();
+		private static readonly IBufferedDocOp Empty = new DocOpBuffer().Finish();
 
 		private WaveId _waveId;
 		private WaveletId _waveletId;
@@ -35,7 +36,7 @@ namespace WaveNET.Core.Model.Wave.Data
 			_documents = new Dictionary<string, IBufferedDocOp>();
 		}
 
-		private IBufferedDocOp GetOrCreateDocument(String documentId)
+		private IDocOp GetOrCreateDocument(String documentId)
 		{
 			IBufferedDocOp doc = _documents[documentId];
 			if (doc == null)
@@ -77,8 +78,8 @@ namespace WaveNET.Core.Model.Wave.Data
 
 		public bool ModifyDocument(string documentId, IBufferedDocOp operation)
 		{
-			IBufferedDocOp doc = Composer.Compose(GetOrCreateDocument(documentId), operation);
-			if (OpComparators.SyntacticIdentity.Equal(doc, WaveletData.Empty))
+			IDocOp doc = Composer.Compose(GetOrCreateDocument(documentId), operation);
+			if (OpComparators.SyntacticIdentity.Equals(doc, WaveletData.Empty))
 				_documents.Remove(documentId);
 			else
 				_documents.Add(documentId, doc);

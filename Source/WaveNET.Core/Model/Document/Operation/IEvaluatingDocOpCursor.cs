@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WaveNET.Core.Model.Document.Operation
 {
-	public interface IEvaluatingDocOpCursor<T> : IDocOpCursor
+	public interface IEvaluatingDocOpCursor<out T> : IDocOpCursor
 	{
 		T Finish();
 	}

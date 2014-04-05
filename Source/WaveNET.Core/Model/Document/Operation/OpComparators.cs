@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 
 namespace WaveNET.Core.Model.Document.Operation
 {
+	internal interface IOpEquator : IEqualityComparer<IDocOp>
+	{
+	}
+
 	/// <summary>
 	/// Utilities for comparing operations.
 	/// </summary>
-	public class OpComparators : IEqualityComparer<IDocOp>
+	public class OpComparators
 	{
 		private  OpComparators() { }
 
@@ -21,9 +26,27 @@ namespace WaveNET.Core.Model.Document.Operation
 			return DocOpUtil.ToConciseString(x).Equals(DocOpUtil.ToConciseString(y));
 		}
 
-		public int GetHashCode(IDocOp obj)
+		internal static readonly IOpEquator SyntacticIdentity = new SyntacticIdentityOpEquatable();
+
+		public class SyntacticIdentityOpEquatable : IOpEquator
 		{
-			throw new NotImplementedException();
+			public bool Equals(IDocOp x, IDocOp y)
+			{
+				Contract.Requires(x != null, "x should not be null");
+				Contract.Requires(y != null, "y should not be null");
+
+				return EqualsNullable(x, y);
+			}
+
+			private bool EqualsNullable(IDocOp x, IDocOp y)
+			{
+				throw new NotImplementedException();
+			}
+
+			public int GetHashCode(IDocOp obj)
+			{
+			    return obj.GetHashCode();
+			}
 		}
 	}
 }
