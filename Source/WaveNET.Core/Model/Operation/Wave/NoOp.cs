@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using WaveNET.Core.Model.Wave.Data;
 
 namespace WaveNET.Core.Model.Operation.Wave
 {
-	public sealed class NoOp : WaveletOperation
+	public sealed class NoOp 
+		: WaveletOperation
 	{
+	    private static readonly int Hash = typeof(NoOp).Name.GetHashCode();
+
 		public NoOp() { }
 
 		protected override void DoApply(WaveletData wavelet)
@@ -20,9 +21,24 @@ namespace WaveNET.Core.Model.Operation.Wave
 			return this;
 		}
 
-		public override string ToString()
+		public override IList<WaveletOperation> ApplyAndReturnReverse(WaveletData target)
 		{
-			return "NoOp()";
+			throw new NotImplementedException();
+		}
+
+		public override void AcceptVisitor(IWaveletOperationVisitor visitor)
+		{
+			throw new NotImplementedException();
+		}
+
+	    public override int GetHashCode()
+	    {
+	        return Hash;
+	    }
+
+	    public override string ToString()
+		{
+			return "NoOp " + SuffixForToString();
 		}
 	}
 }

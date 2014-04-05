@@ -51,39 +51,39 @@ namespace WaveNET.Core.Model.Operation.Wave
 			}
 			else
 			{
-				if (serverOperation is RemoveParticipant)
+				if (serverOperation is RemoveParticipantOperation)
 				{
-					if (clientOperation is RemoveParticipant)
+					if (clientOperation is RemoveParticipantOperation)
 					{
-						ParticipantId clientParticipant = ((RemoveParticipant)clientOperation).Participant;
-						ParticipantId serverParticipant = ((RemoveParticipant)serverOperation).Participant;
+						ParticipantId clientParticipant = ((RemoveParticipantOperation)clientOperation).Participant;
+						ParticipantId serverParticipant = ((RemoveParticipantOperation)serverOperation).Participant;
 						if (clientParticipant.Equals(serverParticipant))
 						{
 							clientOperation = null;
 							serverOperation = null;
 						}
 					}
-					else if (clientOperation is AddParticipant)
+					else if (clientOperation is AddParticipantOperation)
 					{
-						CheckParticipantRemovalAndAddition((RemoveParticipant)serverOperation,
-							(AddParticipant)clientOperation);
+						CheckParticipantRemovalAndAddition((RemoveParticipantOperation)serverOperation,
+							(AddParticipantOperation)clientOperation);
 					}
 				}
-				else if (serverOperation is AddParticipant)
+				else if (serverOperation is AddParticipantOperation)
 				{
-					if (clientOperation is AddParticipant)
+					if (clientOperation is AddParticipantOperation)
 					{
-						ParticipantId clientParticipant = ((AddParticipant)clientOperation).Participant;
-						ParticipantId serverParticipant = ((AddParticipant)serverOperation).Participant;
+						ParticipantId clientParticipant = ((AddParticipantOperation)clientOperation).Participant;
+						ParticipantId serverParticipant = ((AddParticipantOperation)serverOperation).Participant;
 						if (clientParticipant.Equals(serverParticipant))
 						{
 							clientOperation = null;
 							serverOperation = null;
 						}
 					}
-					else if (clientOperation is RemoveParticipant)
+					else if (clientOperation is RemoveParticipantOperation)
 					{
-						CheckParticipantRemovalAndAddition((RemoveParticipant)clientOperation, (AddParticipant)serverOperation);
+						CheckParticipantRemovalAndAddition((RemoveParticipantOperation)clientOperation, (AddParticipantOperation)serverOperation);
 					}
 				}
 			}
@@ -96,13 +96,13 @@ namespace WaveNET.Core.Model.Operation.Wave
 		/// by another concurrent operation. In such a situation, at least one of the
 		/// operations is invalid.
 		/// </summary>
-		/// <param name="removeParticipant">The operation to remove a participant.</param>
-		/// <param name="addParticipant">The operation to add a participant.</param>
+		/// <param name="removeOperation">The operation to remove a participant.</param>
+		/// <param name="addOperation">The operation to add a participant.</param>
 		/// <exception cref="TransformException">TransformException if the same participant is being concurrently added and removed.</exception>
-		private static void CheckParticipantRemovalAndAddition(RemoveParticipant removeParticipant, AddParticipant addParticipant)
+		private static void CheckParticipantRemovalAndAddition(RemoveParticipantOperation removeOperation, AddParticipantOperation addOperation)
 		{
-			if (removeParticipant.Participant.Equals(addParticipant.Participant))
-				throw new TransformException("Transform error involving participant: " + removeParticipant.Participant.GetAddress());
+			if (removeOperation.Participant.Equals(addOperation.Participant))
+				throw new TransformException("Transform error involving participant: " + removeOperation.Participant.GetAddress());
 		}
 	}
 }
