@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace WaveNET.Server
 {
-	public interface IPostSignerInfoResponseListener
-	{
-		void OnSuccess();
-		void OnFailure(String errorMessage);
-	}
+    public interface IPostSignerInfoResponseListener
+    {
+        void OnSuccess();
+        void OnFailure(String errorMessage);
+    }
 }

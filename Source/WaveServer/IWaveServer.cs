@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics.Contracts;
-
-namespace WaveNET.Server
+﻿namespace WaveNET.Server
 {
-	public interface IWaveServer 
-		: IWaveletProvider,
-		IWaveletFederationProvider,
-		IWaveletFederationListener.IFactory
-	{
-	}
+    public interface IWaveServer
+        : IWaveletProvider,
+            IWaveletFederationProvider,
+            IWaveletFederationListener.IFactory
+    {
+    }
 }
