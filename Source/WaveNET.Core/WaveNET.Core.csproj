@@ -87,7 +87,7 @@
     <Compile Include="Model\Operation\IOperation.cs" />
     <Compile Include="Model\Operation\OperationException.cs" />
     <Compile Include="Model\Operation\OperationPair.cs" />
-    <Compile Include="Model\Operation\Transform.cs" />
+    <Compile Include="Model\Operation\Wave\Transformer.cs" />
     <Compile Include="Model\Operation\TransformException.cs" />
     <Compile Include="Model\Operation\Wave\AddParticipant.cs" />
     <Compile Include="Model\Operation\Wave\NoOp.cs" />
