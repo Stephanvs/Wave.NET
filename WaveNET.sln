@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveNET.Core", "Source\Wave
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{78F25EED-BE21-4DA4-90D8-FE089AAB07C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveNet.Server", "WaveNet.Server\WaveNet.Server.csproj", "{A86C6A70-6D76-4379-8167-0CD9792DCC8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveNET.Server", "Source\WaveNET.Server\WaveNET.Server.csproj", "{A86C6A70-6D76-4379-8167-0CD9792DCC8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
