@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using WaveNET.Core.Model.Document.Operation;
 using System.Diagnostics.Contracts;
+using WaveNET.Core.Model.Document.Operation.Algorithm;
 
 namespace WaveNET.Core.Model.Operation.Wave
 {
