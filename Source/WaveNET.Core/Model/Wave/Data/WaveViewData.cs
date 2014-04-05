@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -43,10 +44,11 @@ namespace WaveNET.Core.Model.Wave.Data
         {
             Contract.Requires(!_wavelets.ContainsKey(waveletId), "Duplicate wavelet id: " + waveletId);
 
-            IWaveletData wavelet = new WaveletData(_waveId, waveletId);
-            _wavelets.Add(waveletId, wavelet);
+            throw new NotImplementedException();
+            //IWaveletData wavelet = new WaveletData(_waveId, waveletId);
+            //_wavelets.Add(waveletId, wavelet);
 
-            return wavelet;
+            //return wavelet;
         }
 
         public void RemoveWavelet(WaveletId waveletId)
