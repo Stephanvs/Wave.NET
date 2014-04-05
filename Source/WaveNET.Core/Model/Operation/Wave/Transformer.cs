@@ -1,4 +1,5 @@
-﻿using WaveNET.Core.Model.Document.Operation;
+﻿using System;
+using WaveNET.Core.Model.Document.Operation;
 using WaveNET.Core.Model.Wave;
 
 namespace WaveNET.Core.Model.Operation.Wave
@@ -19,74 +20,75 @@ namespace WaveNET.Core.Model.Operation.Wave
         public static OperationPair<WaveletOperation> Transform(WaveletOperation clientOperation,
                                                                 WaveletOperation serverOperation)
         {
-            if (clientOperation is WaveletDocumentOperation && serverOperation is WaveletDocumentOperation)
-            {
-                var clientWaveDocOp = (WaveletDocumentOperation) clientOperation;
-                var serverWaveDocOp = (WaveletDocumentOperation) serverOperation;
-                if (clientWaveDocOp.DocumentId.Equals(serverWaveDocOp.DocumentId))
-                {
-                    // Transform document operations
-                    IBufferedDocOp clientMutation = clientWaveDocOp.Operation;
-                    IBufferedDocOp serverMutation = serverWaveDocOp.Operation;
-                    OperationPair<BufferedDocOp> transformedDocOps = Transformer.Transform(clientMutation,
-                        serverMutation);
+            throw new NotImplementedException();
+            //if (clientOperation is WaveletDocumentOperation && serverOperation is WaveletDocumentOperation)
+            //{
+            //    var clientWaveDocOp = (WaveletDocumentOperation) clientOperation;
+            //    var serverWaveDocOp = (WaveletDocumentOperation) serverOperation;
+            //    if (clientWaveDocOp.DocumentId.Equals(serverWaveDocOp.DocumentId))
+            //    {
+            //        // Transform document operations
+            //        IBufferedDocOp clientMutation = clientWaveDocOp.Operation;
+            //        IBufferedDocOp serverMutation = serverWaveDocOp.Operation;
+            //        OperationPair<BufferedDocOp> transformedDocOps = Transformer.Transform(clientMutation,
+            //            serverMutation);
 
-                    // Only recreate boxes if transform did something.  Yes, this is != not !.equals
-                    if (transformedDocOps.ClientOperation != clientMutation)
-                    {
-                        clientOperation = transformedDocOps.ClientOperation != null
-                            ? new WaveletDocumentOperation(clientWaveDocOp.DocumentId, transformedDocOps.ClientOperation)
-                            : null;
-                    }
-                    if (transformedDocOps.ServerOperation != serverMutation)
-                    {
-                        serverOperation = transformedDocOps.ServerOperation != null
-                            ? new WaveletDocumentOperation(serverWaveDocOp.DocumentId, transformedDocOps.ServerOperation)
-                            : null;
-                    }
-                }
-            }
-            else
-            {
-                if (serverOperation is RemoveParticipantOperation)
-                {
-                    if (clientOperation is RemoveParticipantOperation)
-                    {
-                        ParticipantId clientParticipant = ((RemoveParticipantOperation) clientOperation).Participant;
-                        ParticipantId serverParticipant = ((RemoveParticipantOperation) serverOperation).Participant;
-                        if (clientParticipant.Equals(serverParticipant))
-                        {
-                            clientOperation = null;
-                            serverOperation = null;
-                        }
-                    }
-                    else if (clientOperation is AddParticipantOperation)
-                    {
-                        CheckParticipantRemovalAndAddition((RemoveParticipantOperation) serverOperation,
-                            (AddParticipantOperation) clientOperation);
-                    }
-                }
-                else if (serverOperation is AddParticipantOperation)
-                {
-                    if (clientOperation is AddParticipantOperation)
-                    {
-                        ParticipantId clientParticipant = ((AddParticipantOperation) clientOperation).Participant;
-                        ParticipantId serverParticipant = ((AddParticipantOperation) serverOperation).Participant;
-                        if (clientParticipant.Equals(serverParticipant))
-                        {
-                            clientOperation = null;
-                            serverOperation = null;
-                        }
-                    }
-                    else if (clientOperation is RemoveParticipantOperation)
-                    {
-                        CheckParticipantRemovalAndAddition((RemoveParticipantOperation) clientOperation,
-                            (AddParticipantOperation) serverOperation);
-                    }
-                }
-            }
-            // Apply identity transform by default
-            return new OperationPair<WaveletOperation>(clientOperation, serverOperation);
+            //        // Only recreate boxes if transform did something.  Yes, this is != not !.equals
+            //        if (transformedDocOps.ClientOperation != clientMutation)
+            //        {
+            //            clientOperation = transformedDocOps.ClientOperation != null
+            //                ? new WaveletDocumentOperation(clientWaveDocOp.DocumentId, transformedDocOps.ClientOperation)
+            //                : null;
+            //        }
+            //        if (transformedDocOps.ServerOperation != serverMutation)
+            //        {
+            //            serverOperation = transformedDocOps.ServerOperation != null
+            //                ? new WaveletDocumentOperation(serverWaveDocOp.DocumentId, transformedDocOps.ServerOperation)
+            //                : null;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    if (serverOperation is RemoveParticipantOperation)
+            //    {
+            //        if (clientOperation is RemoveParticipantOperation)
+            //        {
+            //            ParticipantId clientParticipant = ((RemoveParticipantOperation) clientOperation).Participant;
+            //            ParticipantId serverParticipant = ((RemoveParticipantOperation) serverOperation).Participant;
+            //            if (clientParticipant.Equals(serverParticipant))
+            //            {
+            //                clientOperation = null;
+            //                serverOperation = null;
+            //            }
+            //        }
+            //        else if (clientOperation is AddParticipantOperation)
+            //        {
+            //            CheckParticipantRemovalAndAddition((RemoveParticipantOperation) serverOperation,
+            //                (AddParticipantOperation) clientOperation);
+            //        }
+            //    }
+            //    else if (serverOperation is AddParticipantOperation)
+            //    {
+            //        if (clientOperation is AddParticipantOperation)
+            //        {
+            //            ParticipantId clientParticipant = ((AddParticipantOperation) clientOperation).Participant;
+            //            ParticipantId serverParticipant = ((AddParticipantOperation) serverOperation).Participant;
+            //            if (clientParticipant.Equals(serverParticipant))
+            //            {
+            //                clientOperation = null;
+            //                serverOperation = null;
+            //            }
+            //        }
+            //        else if (clientOperation is RemoveParticipantOperation)
+            //        {
+            //            CheckParticipantRemovalAndAddition((RemoveParticipantOperation) clientOperation,
+            //                (AddParticipantOperation) serverOperation);
+            //        }
+            //    }
+            //}
+            //// Apply identity transform by default
+            //return new OperationPair<WaveletOperation>(clientOperation, serverOperation);
         }
 
         /// <summary>
@@ -103,9 +105,10 @@ namespace WaveNET.Core.Model.Operation.Wave
         private static void CheckParticipantRemovalAndAddition(RemoveParticipantOperation removeOperation,
                                                                AddParticipantOperation addOperation)
         {
-            if (removeOperation.Participant.Equals(addOperation.Participant))
-                throw new TransformException("Transform error involving participant: " +
-                                             removeOperation.Participant.GetAddress());
+            throw new NotImplementedException();
+            //if (removeOperation.Participant.Equals(addOperation.Participant))
+            //    throw new TransformException("Transform error involving participant: " +
+            //                                 removeOperation.Participant.GetAddress());
         }
     }
 }
