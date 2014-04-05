@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics.Contracts;
+using WaveNET.Core.Model.Document.Operation.Automation;
+using WaveNET.Core.Model.Document.Operation.Validation;
 
 namespace WaveNET.Core.Model.Document.Operation
 {
@@ -14,7 +16,7 @@ namespace WaveNET.Core.Model.Document.Operation
 	/// <see cref="DocOpBuffer"/>
 	/// <see cref="DocInitializationBuffer"/>
 	/// </summary>
-	public class BufferedDocOp : IBufferedDocOp
+	public class BufferedDocOp : IBufferedDocOp 
 	{
 		#region BufferedDocOp Implementation
 

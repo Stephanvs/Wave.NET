@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WaveNET.Core.Model.Operation
 {
-	public interface IOperation<T>
+	public interface IOperation<in T>
 	{
 		/// <summary>
 		/// Applies this operation to the given target

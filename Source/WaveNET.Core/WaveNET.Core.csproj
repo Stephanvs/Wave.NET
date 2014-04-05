@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Model\Document\Bootstrap\BootstrapDocument.cs" />
     <Compile Include="Model\Document\Operation\Automation\IAutomationDocument.cs" />
+    <Compile Include="Model\Document\Operation\Automation\ViolationCollector.cs" />
     <Compile Include="Model\Document\Operation\BufferedDocOp.cs" />
     <Compile Include="Model\Document\Operation\DocInitializationComponentType.cs" />
     <Compile Include="Model\Document\Operation\DocOpBuffer.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Model\Document\Operation\UncheckedDocOpBuffer.cs" />
     <Compile Include="Model\Document\Operation\Util\IStateMap.cs" />
     <Compile Include="Model\Document\Operation\Util\IUpdateMap.cs" />
+    <Compile Include="Model\Document\Operation\Validation\DocOpValidator.cs" />
     <Compile Include="Model\Id\IdConstants.cs" />
     <Compile Include="Model\Id\IIdGenerator.cs" />
     <Compile Include="Model\Id\IIdSerializer.cs" />
