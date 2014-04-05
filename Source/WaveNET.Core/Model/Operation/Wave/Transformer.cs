@@ -1,6 +1,4 @@
 ﻿using System;
-using WaveNET.Core.Model.Document.Operation;
-using WaveNET.Core.Model.Wave;
 
 namespace WaveNET.Core.Model.Operation.Wave
 {

@@ -1,52 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
 
 namespace WaveNET.Core.Model.Document.Operation
 {
-	internal interface IOpEquator : IEqualityComparer<IDocOp>
-	{
-	}
+    internal interface IOpEquator : IEqualityComparer<IDocOp>
+    {
+    }
 
-	/// <summary>
-	/// Utilities for comparing operations.
-	/// </summary>
-	public class OpComparators
-	{
-		private  OpComparators() { }
+    /// <summary>
+    ///     Utilities for comparing operations.
+    /// </summary>
+    public class OpComparators
+    {
+        internal static readonly IOpEquator SyntacticIdentity = new SyntacticIdentityOpEquatable();
 
-		public bool Equals(IDocOp x, IDocOp y)
-		{
-			if (x == null) return y == null;
-			if (y == null) return false;
+        private OpComparators()
+        {
+        }
 
-			// TODO: Comparing by stringifying is unnecessarily expensive.
-			return DocOpUtil.ToConciseString(x).Equals(DocOpUtil.ToConciseString(y));
-		}
+        public bool Equals(IDocOp x, IDocOp y)
+        {
+            if (x == null) return y == null;
+            if (y == null) return false;
 
-		internal static readonly IOpEquator SyntacticIdentity = new SyntacticIdentityOpEquatable();
+            // TODO: Comparing by stringifying is unnecessarily expensive.
+            return DocOpUtil.ToConciseString(x).Equals(DocOpUtil.ToConciseString(y));
+        }
 
-		public class SyntacticIdentityOpEquatable : IOpEquator
-		{
-			public bool Equals(IDocOp x, IDocOp y)
-			{
-				Contract.Requires(x != null, "x should not be null");
-				Contract.Requires(y != null, "y should not be null");
+        public class SyntacticIdentityOpEquatable : IOpEquator
+        {
+            public bool Equals(IDocOp x, IDocOp y)
+            {
+                Contract.Requires(x != null, "x should not be null");
+                Contract.Requires(y != null, "y should not be null");
 
-				return EqualsNullable(x, y);
-			}
+                return EqualsNullable(x, y);
+            }
 
-			private bool EqualsNullable(IDocOp x, IDocOp y)
-			{
-				throw new NotImplementedException();
-			}
+            public int GetHashCode(IDocOp obj)
+            {
+                return obj.GetHashCode();
+            }
 
-			public int GetHashCode(IDocOp obj)
-			{
-			    return obj.GetHashCode();
-			}
-		}
-	}
+            private bool EqualsNullable(IDocOp x, IDocOp y)
+            {
+                throw new NotImplementedException();
+            }
+        }
+    }
 }

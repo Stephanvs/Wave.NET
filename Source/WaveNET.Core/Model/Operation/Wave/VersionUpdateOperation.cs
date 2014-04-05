@@ -50,7 +50,7 @@ namespace WaveNET.Core.Model.Operation.Wave
             if (string.IsNullOrEmpty(_docId))
             {
                 // Update blip version.
-                IBlipData blip = (IBlipData) wavelet.GetDocument(_docId);
+                var blip = (IBlipData) wavelet.GetDocument(_docId);
                 long newWaveletVersion = wavelet.Version + Context.VersionIncrement;
                 long newDocVersion = _useFixedBlipInfo ? _docVersion : newWaveletVersion;
                 long oldDocVersion = blip.LastModifiedVersion = newDocVersion;

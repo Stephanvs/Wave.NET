@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace WaveNET.Core.Model.Document.Operation
+﻿namespace WaveNET.Core.Model.Document.Operation
 {
-	public class DocInitializationComponentType : DocOpComponentType
-	{
-		public DocInitializationComponentType(string name) : base(name) { }
-	}
+    public class DocInitializationComponentType : DocOpComponentType
+    {
+        public DocInitializationComponentType(string name) : base(name)
+        {
+        }
+    }
 }

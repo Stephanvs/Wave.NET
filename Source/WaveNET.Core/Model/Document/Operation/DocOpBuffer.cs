@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace WaveNET.Core.Model.Document.Operation
+﻿namespace WaveNET.Core.Model.Document.Operation
 {
-	public class DocOpBuffer : UncheckedDocOpBuffer
-	{
-	}
+    public class DocOpBuffer : UncheckedDocOpBuffer
+    {
+    }
 }

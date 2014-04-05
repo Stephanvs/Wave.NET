@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace WaveNET.Core.Model.Document.Operation
+﻿namespace WaveNET.Core.Model.Document.Operation
 {
-	/// <summary>
-	/// The callback interface used by DocInitialization's apply method.
-	/// </summary>
-	public interface IDocInitializationCursor
-	{
-		void AnnotationBoundary(IAnnotationBoundaryMap map);
-		void Characters(string characters);
-		void ElementStart(string type, IAttributes attributes);
-		void ElementEnd();
-	}
+    /// <summary>
+    ///     The callback interface used by DocInitialization's apply method.
+    /// </summary>
+    public interface IDocInitializationCursor
+    {
+        void AnnotationBoundary(IAnnotationBoundaryMap map);
+        void Characters(string characters);
+        void ElementStart(string type, IAttributes attributes);
+        void ElementEnd();
+    }
 }

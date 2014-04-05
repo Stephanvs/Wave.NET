@@ -38,7 +38,7 @@ namespace WaveNET.Core.Model.Operation.Wave
 
             return new ReadOnlyCollection<WaveletOperation>(new WaveletOperation[]
             {
-                new AddParticipantOperation(reverseContext, ParticipantId, position) 
+                new AddParticipantOperation(reverseContext, ParticipantId, position)
             });
         }
 

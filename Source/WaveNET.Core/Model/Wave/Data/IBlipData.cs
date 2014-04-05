@@ -14,12 +14,12 @@ namespace WaveNET.Core.Model.Wave.Data
         IWaveletData Wavelet { get; }
 
         /// <summary>
-        /// Sets the last-modified time of this blip
+        ///     Sets the last-modified time of this blip
         /// </summary>
         DateTime LastModifiedTime { get; set; }
 
         /// <summary>
-        /// Sets the last-modified version of this blip.
+        ///     Sets the last-modified version of this blip.
         /// </summary>
         long LastModifiedVersion { get; set; }
 
@@ -42,7 +42,7 @@ namespace WaveNET.Core.Model.Wave.Data
         void RemoveContributor(ParticipantId participant);
 
         /// <summary>
-        /// Notifies the BlipData that the content of the document inside the blip have changed.
+        ///     Notifies the BlipData that the content of the document inside the blip have changed.
         /// </summary>
         void OnRemoteContentModified();
     }

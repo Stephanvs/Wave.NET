@@ -5,7 +5,7 @@ using WaveNET.Core.Model.Wave;
 namespace WaveNET.Core.Model.Operation.Wave
 {
     /// <summary>
-    /// Encapsulates context information for a wave operation.
+    ///     Encapsulates context information for a wave operation.
     /// </summary>
     public sealed class WaveletOperationContext
     {
