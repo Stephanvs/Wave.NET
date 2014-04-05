@@ -36,6 +36,7 @@ namespace WaveNET.Core.Model.Id
         }
 
         public string Domain { get; private set; }
+
         public string Id { get; private set; }
 
         public int CompareTo(WaveId other)
