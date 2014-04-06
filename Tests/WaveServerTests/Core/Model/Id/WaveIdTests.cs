@@ -9,15 +9,30 @@ namespace WaveNET.Tests.Core
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentException), AllowDerivedTypes = true)]
-        public void TestEmptyDomainRejected()
+        public void TestNullWaveIdDomainRejected()
         {
-            AssertIdRejected(null, "id");
-            AssertIdRejected("", "id");
+            var waveId = new WaveId(null, "id");
         }
 
-        private static void AssertIdRejected(string domain, string id)
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), AllowDerivedTypes = true)]
+        public void TestEmptyWaveIdDomainRejected()
         {
-            var x = new WaveId(domain, id);
+            var waveId = new WaveId("", "id");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), AllowDerivedTypes = true)]
+        public void TestNullWaveletIdDomainRejected()
+        {
+            var waveletId = new WaveletId(null, "id");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof (ArgumentException), AllowDerivedTypes = true)]
+        public void TestEmptyWaveletIdDomainRejected()
+        {
+            var waveletId = new WaveletId("", "id");
         }
     }
 }

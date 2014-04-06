@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using WaveNET.Core.Utils;
 
 namespace WaveNET.Core.Model.Id
 {
@@ -7,8 +8,8 @@ namespace WaveNET.Core.Model.Id
     {
         public WaveletId(string domain, string id)
         {
-            Contract.Requires(!String.IsNullOrEmpty(domain), "The parameter 'domain' cannot be null or empty");
-            Contract.Requires(!String.IsNullOrEmpty(id), "The parameter 'id' cannot be null or empty");
+            Preconditions.CheckNotNullOrEmpty(domain, "The parameter 'domain' cannot be null or empty");
+            Preconditions.CheckNotNullOrEmpty(id, "The parameter 'id' cannot be null or empty");
 
             // todo: implement some other stuff: http://code.google.com/p/wave-protocol/source/browse/src/org/waveprotocol/wave/model/id/WaveletId.java
             //if (SimplePrefixEscaper.DEFAULT_ESCAPER.hasEscapeCharacters(domain))
