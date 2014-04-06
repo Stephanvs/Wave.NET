@@ -1,9 +1,8 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WaveNET.Core.Model.Id;
 
-namespace WaveNET.Tests.Core.Model.Id
+namespace WaveNET.Tests.Core.Models.Ids
 {
     
     public class WaveletNameTests
