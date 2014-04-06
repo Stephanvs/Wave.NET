@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
+using WaveNET.Core.Utils;
 
 namespace WaveNET.Core.Model.Wave
 {
@@ -9,56 +9,54 @@ namespace WaveNET.Core.Model.Wave
     /// </summary>
     public sealed class ParticipantId
     {
-        private readonly string _address;
-
         /// <summary>
         ///     Creates a new instance of the ParticipantId class
         /// </summary>
         /// <param name="address">A non-null adress string</param>
         public ParticipantId(string address)
         {
-            Contract.Requires(!String.IsNullOrEmpty(address), "The parameter 'address' cannot be null or empty.");
+            Preconditions.CheckNotNullOrEmpty(address, "The parameter 'address' cannot be null or empty.");
 
-            _address = Normalize(address);
+            Address = Normalize(address);
         }
 
         /// <summary>
         ///     Gets the participant's address
         /// </summary>
-        /// <returns>The participant's address</returns>
-        public string GetAddress()
-        {
-            return _address;
-        }
+        /// <value>The participant&apos;s address</value>
+        public string Address { get; private set; }
 
         /// <summary>
         ///     Gets the domain name in the address. If no '@' occurs, it will be the entire string,
         ///     If more than one '@' occurs, it will be the part after the last '@'.
         /// </summary>
-        /// <returns></returns>
-        public string GetDomain()
+        /// <value></value>
+        public string Domain
         {
-            string[] parts = _address.Split('@');
-            return parts[parts.Length - 1];
+            get
+            {
+                string[] parts = Address.Split('@');
+                return parts[parts.Length - 1];
+            }
         }
 
         public override bool Equals(object obj)
         {
             if (obj == this) return true;
             var id = obj as ParticipantId;
-            if (id != null) return id._address.Equals(_address);
+            if (id != null) return id.Address.Equals(Address);
 
             return false;
         }
 
         public override int GetHashCode()
         {
-            return _address.GetHashCode();
+            return Address.GetHashCode();
         }
 
         public override string ToString()
         {
-            return _address;
+            return Address;
         }
 
         /// <summary>
