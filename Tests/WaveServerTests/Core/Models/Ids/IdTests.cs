@@ -1,10 +1,12 @@
 ﻿using System;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WaveNET.Core.Model.Id;
+using Xunit;
 
 namespace WaveNET.Tests.Core.Models.Ids
 {
+    [Trait("Category", "IdTests")]
+    [Trait("Speed", "Fast")]
     public class IdTests
     {
         public static WaveId CreateWaveId(string domain, string id)
@@ -17,10 +19,9 @@ namespace WaveNET.Tests.Core.Models.Ids
             return WaveletId.Of(domain, id);
         }
 
-        [TestClass]
         public class WaveIdEqualityTests
         {
-            [TestMethod]
+            [Fact]
             public void SameDomainAndIdShoudEqual()
             {
                 WaveId x = CreateWaveId("domain", "id");
@@ -30,7 +31,7 @@ namespace WaveNET.Tests.Core.Models.Ids
                 y.Equals(x).Should().BeTrue();
             }
 
-            [TestMethod]
+            [Fact]
             public void DifferentDomainSameIdShouldNotEqual()
             {
                 WaveId x = CreateWaveId("one", "id");
@@ -40,7 +41,7 @@ namespace WaveNET.Tests.Core.Models.Ids
                 y.Equals(x).Should().BeFalse();
             }
 
-            [TestMethod]
+            [Fact]
             public void DifferentIdsSameDomainShoudNotEqual()
             {
                 WaveId x = CreateWaveId("one", "sa");
@@ -51,28 +52,24 @@ namespace WaveNET.Tests.Core.Models.Ids
             }
         }
 
-        [TestClass]
         public class WaveIdTests
         {
-            [TestMethod]
-            [ExpectedException(typeof (ArgumentException), AllowDerivedTypes = true)]
+            [Fact]
             public void TestNullWaveIdDomainRejected()
             {
-                WaveId waveId = CreateWaveId(null, "id");
+                Assert.Throws<ArgumentNullException>(() => { WaveId waveId = CreateWaveId(null, "id"); });
             }
 
-            [TestMethod]
-            [ExpectedException(typeof (ArgumentException), AllowDerivedTypes = true)]
+            [Fact]
             public void TestEmptyWaveIdDomainRejected()
             {
-                WaveId waveId = CreateWaveId("", "id");
+                Assert.Throws<ArgumentNullException>(() => { WaveId waveId = CreateWaveId("", "id"); });
             }
         }
 
-        [TestClass]
         public class WaveletIdEqualityTests
         {
-            [TestMethod]
+            [Fact]
             public void SameDomainAndIdShoudEqual()
             {
                 WaveletId x = CreateWaveletId("domain", "id");
@@ -82,7 +79,7 @@ namespace WaveNET.Tests.Core.Models.Ids
                 y.Equals(x).Should().BeTrue();
             }
 
-            [TestMethod]
+            [Fact]
             public void DifferentDomainSameIdShouldNotEqual()
             {
                 WaveletId x = CreateWaveletId("one", "id");
@@ -92,7 +89,7 @@ namespace WaveNET.Tests.Core.Models.Ids
                 y.Equals(x).Should().BeFalse();
             }
 
-            [TestMethod]
+            [Fact]
             public void DifferentIdsSameDomainShoudNotEqual()
             {
                 WaveletId x = CreateWaveletId("one", "sa");
@@ -103,21 +100,18 @@ namespace WaveNET.Tests.Core.Models.Ids
             }
         }
 
-        [TestClass]
         public class WaveletIdTests
         {
-            [TestMethod]
-            [ExpectedException(typeof (ArgumentException), AllowDerivedTypes = true)]
+            [Fact]
             public void TestNullWaveletIdDomainRejected()
             {
-                WaveletId waveletId = CreateWaveletId(null, "id");
+                Assert.Throws<ArgumentNullException>(() => { WaveletId waveletId = CreateWaveletId(null, "id"); });
             }
 
-            [TestMethod]
-            [ExpectedException(typeof (ArgumentException), AllowDerivedTypes = true)]
+            [Fact]
             public void TestEmptyWaveletIdDomainRejected()
             {
-                WaveletId waveletId = CreateWaveletId("", "id");
+                Assert.Throws<ArgumentNullException>(() => { WaveletId waveletId = CreateWaveletId("", "id"); });
             }
         }
     }
