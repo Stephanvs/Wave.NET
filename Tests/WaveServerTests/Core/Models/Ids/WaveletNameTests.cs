@@ -4,6 +4,7 @@ using Xunit;
 
 namespace WaveNET.Tests.Core.Models.Ids
 {
+    [Trait("Category", "WaveletName")]
     public class WaveletNameTests
     {
         public static WaveletName CreateWaveletName(string domain, string id)
