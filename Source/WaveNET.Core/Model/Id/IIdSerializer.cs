@@ -14,6 +14,8 @@
         /// </summary>
         string SerializeWaveletId(WaveletId waveletId);
 
+        string SerializeWaveletName(WaveletName name);
+
         /// <summary>
         ///     Turn a string into a wavel id. If the domain is not specified in the string, then the
         ///     wave id returned has the default domain.
@@ -25,5 +27,7 @@
         ///     wave id returned has the default domain.
         /// </summary>
         WaveletId DeserializeWaveletId(string serializedForm);
+
+        WaveletName DeserializeWaveletName(string serializedForm);
     }
 }

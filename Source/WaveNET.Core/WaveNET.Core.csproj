@@ -117,6 +117,9 @@
     <Compile Include="Model\Id\IdConstants.cs" />
     <Compile Include="Model\Id\IIdGenerator.cs" />
     <Compile Include="Model\Id\IIdSerializer.cs" />
+    <Compile Include="Model\Id\InvalidIdException.cs" />
+    <Compile Include="Model\Id\Serializers\LegacyIdSerializer.cs" />
+    <Compile Include="Model\Id\Serializers\ModernIdSerializer.cs" />
     <Compile Include="Model\Id\WaveId.cs" />
     <Compile Include="Model\Id\WaveletId.cs" />
     <Compile Include="Model\Id\WaveletName.cs" />

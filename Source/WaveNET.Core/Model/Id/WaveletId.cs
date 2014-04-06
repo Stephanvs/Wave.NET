@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
+using WaveNET.Core.Model.Id.Serializers;
 using WaveNET.Core.Utils;
 
 namespace WaveNET.Core.Model.Id
 {
     public class WaveletId : IComparable<WaveletId>
     {
-        public WaveletId(string domain, string id)
+        private WaveletId(string domain, string id)
         {
             Preconditions.CheckNotNullOrEmpty(domain, "The parameter 'domain' cannot be null or empty");
             Preconditions.CheckNotNullOrEmpty(id, "The parameter 'id' cannot be null or empty");
@@ -37,9 +37,14 @@ namespace WaveNET.Core.Model.Id
             return domainCompare;
         }
 
+        public static WaveletId Of(string domain, string id)
+        {
+            return new WaveletId(domain, id);
+        }
+
         public string Serialize()
         {
-            throw new NotImplementedException();
+            return ModernIdSerializer.Instance.SerializeWaveletId(this);
             // todo: implement Serialize, see: http://code.google.com/p/wave-protocol/source/browse/src/org/waveprotocol/wave/model/id/WaveletId.java
             // return LongIdSerialiser.Instance.SerialiseWaveletId(this);
         }
@@ -51,9 +56,7 @@ namespace WaveNET.Core.Model.Id
         /// <returns>a WaveletId</returns>
         public static WaveletId Deserialize(String waveletIdString)
         {
-            throw new NotImplementedException();
-            // Todo: implement Deserialize
-            //return LongIdSerialiser.Instance.DeserialiseWaveletId(waveletIdString);
+            return ModernIdSerializer.Instance.DeserializeWaveletId(waveletIdString);
         }
 
         public override bool Equals(object obj)
@@ -81,7 +84,7 @@ namespace WaveNET.Core.Model.Id
 
         public override string ToString()
         {
-            return String.Format("[WaveletId:{0}]", Serialize());
+            return String.Format("[WaveletId {0}]", Serialize());
         }
     }
 }

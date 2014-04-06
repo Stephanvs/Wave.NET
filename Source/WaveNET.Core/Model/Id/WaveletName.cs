@@ -1,4 +1,5 @@
 ﻿using System;
+using WaveNET.Core.Model.Id.Serializers;
 
 namespace WaveNET.Core.Model.Id
 {
@@ -47,7 +48,9 @@ namespace WaveNET.Core.Model.Id
 
         public override string ToString()
         {
-            return _waveId + "/" + _waveletId;
+            return string.Format("[WaveletName {0}/{1}]", 
+                ModernIdSerializer.Instance.SerializeWaveId(_waveId),
+                ModernIdSerializer.Instance.SerializeWaveletId(_waveletId));
         }
 
         public override bool Equals(object obj)

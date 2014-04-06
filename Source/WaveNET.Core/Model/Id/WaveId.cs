@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
+using WaveNET.Core.Model.Id.Serializers;
 using WaveNET.Core.Utils;
 
 namespace WaveNET.Core.Model.Id
@@ -10,12 +10,14 @@ namespace WaveNET.Core.Model.Id
     /// </summary>
     public sealed class WaveId : IComparable<WaveId>
     {
+        private readonly IIdSerializer _idSerializer = ModernIdSerializer.Instance;
+
         /// <summary>
         ///     Creates an instance of a WaveId class.
         /// </summary>
         /// <param name="domain">Domain must not be null. This is assumed to be of a valid canonical domain format.</param>
         /// <param name="id">Id must not be null. This is assumed to be escaped with SimplePrefixEscaper.DefaultEscaper.</param>
-        public WaveId(string domain, string id)
+        private WaveId(string domain, string id)
         {
             Preconditions.CheckNotNullOrEmpty(domain, "The parameter 'domain' cannot be null");
             Preconditions.CheckNotNullOrEmpty(id, "The parameter 'id' cannot be null");
@@ -48,6 +50,11 @@ namespace WaveNET.Core.Model.Id
             return domainCompare;
         }
 
+        public static WaveId Of(string domain, string id)
+        {
+            return new WaveId(domain, id);
+        }
+
         /// <summary>
         ///     Serialises this waveId into a unique string. For any two wave ids, waveId1.serialise().equals(waveId2.serialise())
         ///     iff waveId1.equals(waveId2).
@@ -55,21 +62,12 @@ namespace WaveNET.Core.Model.Id
         /// <returns></returns>
         public String Serialize()
         {
-            throw new NotImplementedException();
-            // todo: implement Serialize().
-            //return LongIdSerialiser.INSTANCE.serialiseWaveId(this);
+            return _idSerializer.SerializeWaveId(this);
         }
 
-        /// <summary>
-        ///     Creates a WaveId from a serialized wave id.
-        /// </summary>
-        /// <param name="waveIdString">A serialized wave id</param>
-        /// <returns>A WaveId</returns>
-        public static WaveId Deserialize(String waveIdString)
+        public static WaveId Deserialize(string serializedForm)
         {
-            throw new NotImplementedException();
-            // todo: implement Deserialize()
-            //return LongIdSerialiser.Instance.DeserialiseWaveId(waveIdString);
+            return ModernIdSerializer.Instance.DeserializeWaveId(serializedForm);
         }
 
         public override bool Equals(object obj)
@@ -98,7 +96,7 @@ namespace WaveNET.Core.Model.Id
 
         public override string ToString()
         {
-            return String.Format("[WaveId:{0}]", Serialize());
+            return String.Format("[WaveId {0}]", Serialize());
         }
     }
 }

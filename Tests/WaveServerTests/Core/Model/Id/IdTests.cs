@@ -9,12 +9,12 @@ namespace WaveNET.Tests.Core.Model.Id
     {
         public static WaveId CreateWaveId(string domain, string id)
         {
-            return new WaveId(domain, id);
+            return WaveId.Of(domain, id);
         }
 
         public static WaveletId CreateWaveletId(string domain, string id)
         {
-            return new WaveletId(domain, id);
+            return WaveletId.Of(domain, id);
         }
 
         [TestClass]
