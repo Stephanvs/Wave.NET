@@ -4,13 +4,13 @@ using Microsoft.Owin.Cors;
 using Owin;
 using WaveNET.Server;
 
-[assembly: OwinStartup(typeof(Startup), "Configuration")]
+[assembly: OwinStartup(typeof (Startup), "Configuration")]
 
 namespace WaveNET.Server
 {
     public class Startup
     {
-         public void Configuration(IAppBuilder app)
+        public void Configuration(IAppBuilder app)
         {
             app.Map("/signalr", map =>
             {
@@ -19,15 +19,15 @@ namespace WaveNET.Server
                 // configure the set of origins and/or http verbs by
                 // providing a cors options with a different policy.
                 map.UseCors(CorsOptions.AllowAll);
-                
-                var hubConfiguration = new HubConfiguration 
+
+                var hubConfiguration = new HubConfiguration
                 {
                     // You can enable JSONP by uncommenting line below.
                     // JSONP requests are insecure but some older browsers (and some
                     // versions of IE) require JSONP to work cross domain
                     // EnableJSONP = true
                 };
-                
+
                 // Run the SignalR pipeline. We're not using MapSignalR
                 // since this branch is already runs under the "/signalr"
                 // path.
