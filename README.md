@@ -1,4 +1,4 @@
-# Wave.Net
+# Wave.NET
 
 Client and Services for the .NET Framework based on the original [Google Wave Protocol] which is now in incubation at the [Apache Software Foundation].
 
