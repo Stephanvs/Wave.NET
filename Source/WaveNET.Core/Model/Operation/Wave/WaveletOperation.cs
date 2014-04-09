@@ -22,7 +22,7 @@ namespace WaveNET.Core.Model.Operation.Wave
         public WaveletOperationContext Context { get; private set; }
 
         /// <summary>
-        ///     This method delegates the operation logic to <see cref="DoApply(WaveletData)" />
+        ///     This method delegates the operation logic to <see cref="DoApply(IWaveletData)" />
         /// </summary>
         /// <param name="wavelet"></param>
         public void Apply(IWaveletData wavelet)
