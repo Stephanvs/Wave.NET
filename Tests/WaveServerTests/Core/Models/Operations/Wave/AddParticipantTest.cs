@@ -74,6 +74,18 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
         }
 
         [Fact]
+        public void CannotRemoveNonParticipant()
+        {
+            var context = A.Fake<WaveletOperationContext>();
+            var wavelet = CreateWaveletData();
+            var op = new RemoveParticipantOperation(context, Creator);
+
+            var ex = Assert.Throws<OperationException>(() => op.Apply(wavelet));
+
+            ex.Message.Should().Be("Attempt to delete non-existent participant: " + Creator);
+        }
+
+        [Fact]
         public void CanAddTwoDifferentParticipants()
         {
             WaveId waveId = WaveId.Of("example.com", "c+123");
