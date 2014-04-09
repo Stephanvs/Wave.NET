@@ -11,17 +11,17 @@ namespace WaveNET.Core.Model.Wave.Data
         /// <summary>
         ///     Gets the wavelet in which this blip appears.
         /// </summary>
-        IWaveletData Wavelet { get; }
+        new IWaveletData Wavelet { get; }
 
         /// <summary>
         ///     Sets the last-modified time of this blip
         /// </summary>
-        DateTime LastModifiedTime { get; set; }
+        new DateTime LastModifiedTime { get; set; }
 
         /// <summary>
         ///     Sets the last-modified version of this blip.
         /// </summary>
-        long LastModifiedVersion { get; set; }
+        new long LastModifiedVersion { get; set; }
 
         /// <summary>
         ///     Notifies this blip that it has been submitted.

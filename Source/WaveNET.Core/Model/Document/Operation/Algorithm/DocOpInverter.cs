@@ -2,7 +2,8 @@
 
 namespace WaveNET.Core.Model.Document.Operation.Algorithm
 {
-    public sealed class DocOpInverter<T> : IEvaluatingDocOpCursor<T>
+    public sealed class DocOpInverter<T> 
+        : IEvaluatingDocOpCursor<T>
     {
         private readonly IEvaluatingDocOpCursor<T> _target;
 
@@ -64,6 +65,13 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
         public void UpdateAttributes(IAttributesUpdate attributesUpdate)
         {
             throw new NotImplementedException();
+        }
+
+        public static IDocOp Invert(IDocOp input)
+        {
+            var inverter = new DocOpInverter<IDocOp>(new DocOpBuffer());
+            input.Apply(inverter);
+            return inverter.Finish();
         }
     }
 }

@@ -10,5 +10,9 @@
     public interface IDocInitialization : IDocOp
     {
         void Apply(IDocInitializationCursor cursor);
+
+        void ApplyComponent(int i, IDocInitializationCursor cursor);
+
+        DocInitializationComponentType GetComponentType(int i);
     }
 }

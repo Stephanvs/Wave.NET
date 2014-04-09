@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace WaveNET.Core.Model.Document.Operation
 {
@@ -6,6 +7,21 @@ namespace WaveNET.Core.Model.Document.Operation
     {
         internal static string ToConciseString(IDocOp docOp)
         {
+            var sb = new StringBuilder();
+            docOp.Apply(CreateConciseStringBuilder(docOp, sb));
+            return sb.ToString();
+        }
+
+        private static IDocOpCursor CreateConciseStringBuilder(IDocOp docOp, StringBuilder sb)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static IDocInitialization AsInitialization(IBufferedDocOp bufferedDocOp)
+        {
+            if (bufferedDocOp is IDocInitialization)
+                return (IDocInitialization) bufferedDocOp;
+
             throw new NotImplementedException();
         }
     }

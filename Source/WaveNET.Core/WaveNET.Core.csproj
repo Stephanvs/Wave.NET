@@ -85,14 +85,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Document\Bootstrap\BootstrapDocument.cs" />
+    <Compile Include="Model\Document\Operation\AbstractBufferedDocInitialization.cs" />
+    <Compile Include="Model\Document\Operation\AbstractDocInitialization.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\ComposeException.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\Composer.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\DocOpInverter.cs" />
     <Compile Include="Model\Document\Operation\Automation\IAutomationDocument.cs" />
     <Compile Include="Model\Document\Operation\Automation\ViolationCollector.cs" />
     <Compile Include="Model\Document\Operation\BufferedDocOp.cs" />
+    <Compile Include="Model\Document\Operation\DocInitializationBuilder.cs" />
     <Compile Include="Model\Document\Operation\DocInitializationComponentType.cs" />
     <Compile Include="Model\Document\Operation\DocOpBuffer.cs" />
+    <Compile Include="Model\Document\Operation\DocOpBuilder.cs" />
     <Compile Include="Model\Document\Operation\DocOpComponentType.cs" />
     <Compile Include="Model\Document\Operation\DocOpUtil.cs" />
     <Compile Include="Model\Document\Operation\IAnnotationBoundaryMap.cs" />
@@ -114,6 +118,7 @@
     <Compile Include="Model\Document\Operation\Util\IStateMap.cs" />
     <Compile Include="Model\Document\Operation\Util\IUpdateMap.cs" />
     <Compile Include="Model\Document\Operation\Validation\DocOpValidator.cs" />
+    <Compile Include="Model\Document\Util\EmptyDocument.cs" />
     <Compile Include="Model\Id\IdConstants.cs" />
     <Compile Include="Model\Id\IIdGenerator.cs" />
     <Compile Include="Model\Id\IIdSerializer.cs" />
@@ -124,11 +129,16 @@
     <Compile Include="Model\Id\WaveletId.cs" />
     <Compile Include="Model\Id\WaveletName.cs" />
     <Compile Include="Model\Operation\IOperation.cs" />
+    <Compile Include="Model\Operation\IOperationSink.cs" />
     <Compile Include="Model\Operation\IReversableOperation.cs" />
     <Compile Include="Model\Operation\IVisitable.cs" />
     <Compile Include="Model\Operation\IVisitor.cs" />
     <Compile Include="Model\Operation\OperationException.cs" />
     <Compile Include="Model\Operation\OperationPair.cs" />
+    <Compile Include="Model\Operation\RemovedAuthorException.cs" />
+    <Compile Include="Model\Operation\Wave\BlipContentOperation.cs" />
+    <Compile Include="Model\Operation\Wave\BlipOperation.cs" />
+    <Compile Include="Model\Operation\Wave\IBlipOperationVisitor.cs" />
     <Compile Include="Model\Operation\Wave\IWaveletOperationVisitor.cs" />
     <Compile Include="Model\Operation\Wave\Transformer.cs" />
     <Compile Include="Model\Operation\TransformException.cs" />
