@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FakeItEasy">
+      <HintPath>..\..\packages\FakeItEasy.1.18.0\lib\net40\FakeItEasy.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions">
       <HintPath>..\..\packages\FluentAssertions.2.2.0.0\lib\net40\FluentAssertions.dll</HintPath>
     </Reference>
@@ -59,6 +62,8 @@
     <Compile Include="Core\Models\Ids\IdTests.cs" />
     <Compile Include="Core\Models\Ids\ParticipantIdTests.cs" />
     <Compile Include="Core\Models\Ids\WaveletNameTests.cs" />
+    <Compile Include="Core\Models\Operations\Core\CoreOperationsTests.cs" />
+    <Compile Include="Core\Models\Operations\Wave\AddParticipantTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,9 +75,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Models\Operations\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

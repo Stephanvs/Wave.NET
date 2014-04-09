@@ -55,6 +55,17 @@ namespace WaveNET.Core.Model.Operation.Wave
             return ParticipantId.GetHashCode();
         }
 
+        public override bool Equals(object obj)
+        {
+            if (!(obj is AddParticipantOperation))
+            {
+                return false;
+            }
+            var other = (AddParticipantOperation) obj;
+
+            return ParticipantId.Equals(other.ParticipantId) && _position == other._position;
+        }
+
         public override string ToString()
         {
             return "AddParticipant(" + ParticipantId + ")";

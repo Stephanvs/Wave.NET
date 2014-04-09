@@ -11,17 +11,17 @@ namespace WaveNET.Core.Model.Wave.Data
         /// <summary>
         ///     Gets or sets the version number of this wavelet.
         /// </summary>
-        long Version { get; set; }
+        new long Version { get; set; }
 
         /// <summary>
         ///     Gets or sets the distinct version of this wavelet.
         /// </summary>
-        HashedVersion HashedVersion { get; set; }
+        new HashedVersion HashedVersion { get; set; }
 
         /// <summary>
         ///     Gets or sets the last-modified time of this wavelet.
         /// </summary>
-        DateTime LastModifiedTime { get; set; }
+        new DateTime LastModifiedTime { get; set; }
 
         /// <summary>
         ///     Creates a document in this wavelet.

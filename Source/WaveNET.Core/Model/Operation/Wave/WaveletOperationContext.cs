@@ -7,8 +7,12 @@ namespace WaveNET.Core.Model.Operation.Wave
     /// <summary>
     ///     Encapsulates context information for a wave operation.
     /// </summary>
-    public sealed class WaveletOperationContext
+    public class WaveletOperationContext
     {
+        internal WaveletOperationContext()
+        {
+        }
+
         /// <summary>
         ///     Creates a context.
         /// </summary>
