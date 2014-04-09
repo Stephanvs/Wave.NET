@@ -29,8 +29,12 @@ namespace WaveNET.Core.Model.Operation.Wave
 
         protected override void DoApply(IWaveletData wavelet)
         {
-            if (!wavelet.AddParticipant(ParticipantId))
+            if (!(_position == EndPosition
+                ? wavelet.AddParticipant(ParticipantId)
+                : wavelet.AddParticipant(ParticipantId, _position)))
+            {
                 throw new OperationException("Attempt to add a duplicate participant");
+            }
         }
 
         public override IList<WaveletOperation> ApplyAndReturnReverse(IWaveletData target)
@@ -52,7 +56,7 @@ namespace WaveNET.Core.Model.Operation.Wave
 
         public override int GetHashCode()
         {
-            return ParticipantId.GetHashCode();
+            return ParticipantId.GetHashCode() + 31 * _position;
         }
 
         public override bool Equals(object obj)

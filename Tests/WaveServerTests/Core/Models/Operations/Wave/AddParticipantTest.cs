@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using FakeItEasy;
 using FluentAssertions;
@@ -15,9 +15,9 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
 {
     public class AddParticipantTest
     {
-        private static readonly ParticipantId Creator = new ParticipantId("abc@example.com");
-        private static readonly ParticipantId Another = new ParticipantId("def@example.com");
-        private static readonly ParticipantId AThird = new ParticipantId("xyz@example.com");
+        private static readonly ParticipantId Creator = new ParticipantId("creator@example.com");
+        private static readonly ParticipantId Another = new ParticipantId("another@example.com");
+        private static readonly ParticipantId AThird = new ParticipantId("athird@example.com");
 
         [Fact]
         public void ReverseOfAddParticipantIsRemoveParticipant()
@@ -25,10 +25,10 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
             var context = A.Fake<WaveletOperationContext>();
             var rop = new RemoveParticipantOperation(context, Creator);
             var aop = new AddParticipantOperation(context, Creator, 0);
-            var wavelet = CreateWaveletData();
+            WaveletData wavelet = CreateWaveletData();
 
-            var reverse = aop.ApplyAndReturnReverse(wavelet);
-            var result = reverse[0];
+            IList<WaveletOperation> reverse = aop.ApplyAndReturnReverse(wavelet);
+            WaveletOperation result = reverse[0];
 
             reverse.Should().HaveCount(1);
             result.Should().BeOfType<RemoveParticipantOperation>();
@@ -39,7 +39,38 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
         [Fact]
         public void ReverseOfRemoveParticipantIsAddParticipantWithPosition()
         {
-            throw new NotImplementedException();
+            var wavelet = CreateWaveletData();
+            var context = A.Fake<WaveletOperationContext>();
+
+            // Build participant list with 3 participants.
+            var participants = new List<ParticipantId> { Creator, Another, AThird };
+            foreach (var p in participants)
+            {
+                wavelet.AddParticipant(p);
+            }
+
+            // Assert that all participants match the ones we just created
+            wavelet.GetParticipants().Should().Contain(participants);
+
+            // The reverse of removing any of the participants is an AddParticipantOperation with the
+            // correct position which, when applied, rolls back the participant list.
+            for (var i = 0; i < participants.Count; i++)
+            {
+                // Cache current participant
+                var participant = participants[i];
+
+                // Get and apply the exact reverse of the RemoveParticipantOperation (should yield an AddParticipantOperation)
+                var reverse = new RemoveParticipantOperation(context, participant).ApplyAndReturnReverse(wavelet);
+
+                reverse.Should().HaveCount(1);
+                reverse.Should().Contain(new AddParticipantOperation(context, participant, i));
+
+                // Re-apply the reverse (thus essentially re-adding the just removed participant)
+                reverse[0].Apply(wavelet);
+
+                // Assert we're back in original state
+                wavelet.GetParticipants().Should().Contain(participants);
+            }
         }
 
         [Fact]
