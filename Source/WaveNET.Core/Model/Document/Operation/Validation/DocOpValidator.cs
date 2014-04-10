@@ -1,13 +1,13 @@
-﻿using System;
-using WaveNET.Core.Model.Document.Operation.Automation;
+﻿using WaveNET.Core.Model.Document.Operation.Automation;
 
 namespace WaveNET.Core.Model.Document.Operation.Validation
 {
-    public class DocOpValidator
+    public static class DocOpValidator
     {
-        public static bool IsWellformed(ViolationCollector x, IBufferedDocOp docOp)
+        public static bool IsWellformed(ViolationCollector collector, IBufferedDocOp docOp)
         {
-            throw new NotImplementedException();
+            // Todo: implement actual validation
+            return true;
         }
     }
 }

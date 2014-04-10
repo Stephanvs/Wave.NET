@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using WaveNET.Core.Model.Document.Operation;
 using WaveNET.Core.Model.Operation;
 using WaveNET.Core.Model.Operation.Wave;
@@ -24,7 +25,8 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
             var clientOperation = new WaveletBlipOperation("dummy", new BlipContentOperation(contextB, x));
             var serverOperation = new RemoveParticipantOperation(contextA, John);
 
-            Assert.Throws<RemovedAuthorException>(() => Transformer.Transform(clientOperation, serverOperation));
+            var ex = Assert.Throws<RemovedAuthorException>(() => Transformer.Transform(clientOperation, serverOperation));
+            ex.Message.Should().Be("Transform error involving participant: " + John.Address);
         }
     }
 }

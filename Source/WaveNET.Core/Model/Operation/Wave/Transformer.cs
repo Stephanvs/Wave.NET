@@ -1,4 +1,5 @@
 ﻿using System;
+using WaveNET.Core.Model.Document.Operation;
 
 namespace WaveNET.Core.Model.Operation.Wave
 {
@@ -18,11 +19,10 @@ namespace WaveNET.Core.Model.Operation.Wave
         public static OperationPair<WaveletOperation> Transform(WaveletOperation clientOperation,
                                                                 WaveletOperation serverOperation)
         {
-            throw new NotImplementedException();
             //if (clientOperation is WaveletDocumentOperation && serverOperation is WaveletDocumentOperation)
             //{
-            //    var clientWaveDocOp = (WaveletDocumentOperation) clientOperation;
-            //    var serverWaveDocOp = (WaveletDocumentOperation) serverOperation;
+            //    var clientWaveDocOp = (WaveletDocumentOperation)clientOperation;
+            //    var serverWaveDocOp = (WaveletDocumentOperation)serverOperation;
             //    if (clientWaveDocOp.DocumentId.Equals(serverWaveDocOp.DocumentId))
             //    {
             //        // Transform document operations
@@ -86,7 +86,7 @@ namespace WaveNET.Core.Model.Operation.Wave
             //    }
             //}
             //// Apply identity transform by default
-            //return new OperationPair<WaveletOperation>(clientOperation, serverOperation);
+            return new OperationPair<WaveletOperation>(clientOperation, serverOperation);
         }
 
         /// <summary>
@@ -103,10 +103,9 @@ namespace WaveNET.Core.Model.Operation.Wave
         private static void CheckParticipantRemovalAndAddition(RemoveParticipantOperation removeOperation,
                                                                AddParticipantOperation addOperation)
         {
-            throw new NotImplementedException();
-            //if (removeOperation.Participant.Equals(addOperation.Participant))
-            //    throw new TransformException("Transform error involving participant: " +
-            //                                 removeOperation.Participant.GetAddress());
+            if (removeOperation.ParticipantId.Equals(addOperation.ParticipantId))
+                throw new TransformException("Transform error involving participant: " +
+                                             removeOperation.ParticipantId.Address);
         }
     }
 }

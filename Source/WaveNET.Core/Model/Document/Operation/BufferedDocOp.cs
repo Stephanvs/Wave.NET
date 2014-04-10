@@ -149,11 +149,11 @@ namespace WaveNET.Core.Model.Document.Operation
 
         private static void CheckWellformedness(BufferedDocOp value)
         {
-            if (!DocOpValidator.IsWellformed(null, value))
+            if (!DocOpValidator.IsWellformed(null, (IBufferedDocOp) value))
             {
                 // Check again, collecting violations this time.
                 var violationCollector = new ViolationCollector();
-                DocOpValidator.IsWellformed(violationCollector, value);
+                DocOpValidator.IsWellformed(violationCollector, (IBufferedDocOp) value);
 
                 // Execution should not reach this point, because the DocOpValidator should return to caller
                 //Contract.Ensures(true,
