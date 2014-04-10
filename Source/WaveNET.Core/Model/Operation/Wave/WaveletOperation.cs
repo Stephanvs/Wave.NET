@@ -38,7 +38,7 @@ namespace WaveNET.Core.Model.Operation.Wave
             Update(wavelet);
         }
 
-        public abstract IEnumerable<WaveletOperation> ApplyAndReturnReverse(IWaveletData target);
+        public abstract IList<WaveletOperation> ApplyAndReturnReverse(IWaveletData target);
 
         public abstract void AcceptVisitor(IWaveletOperationVisitor visitor);
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WaveNET.Core.Model.Operation.Wave;
 
 namespace WaveNET.Core.Model.Operation
 {
@@ -22,6 +23,6 @@ namespace WaveNET.Core.Model.Operation
         ///     The returned sequence of operations, when applied in order after this operation is applied, should reverse the
         ///     effect of this operation
         /// </remarks>
-        IEnumerable<TOperation> ApplyAndReturnReverse(TTarget target);
+        IList<TOperation> ApplyAndReturnReverse(TTarget target);
     }
 }

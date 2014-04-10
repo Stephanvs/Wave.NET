@@ -33,7 +33,12 @@ namespace WaveNET.Core.Model.Wave.Data
 
         public WaveletId WaveletId { get; protected set; }
 
-        public abstract IReadableBlipData GetDocument(string documentName);
+        public abstract IBlipData GetDocument(string documentName);
+
+        IReadableBlipData IReadableWaveletData.GetDocument(string documentName)
+        {
+            return GetDocument(documentName);
+        }
 
         public abstract ICollection<string> GetDocumentIds();
 

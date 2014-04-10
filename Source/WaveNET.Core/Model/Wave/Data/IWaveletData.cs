@@ -24,6 +24,13 @@ namespace WaveNET.Core.Model.Wave.Data
         new DateTime LastModifiedTime { get; set; }
 
         /// <summary>
+        ///     Gets this wavelet's document identified by the provided name.
+        /// </summary>
+        /// <param name="documentName">Name of the document</param>
+        /// <returns>the requested document.</returns>
+        new IBlipData GetDocument(string documentName);
+
+        /// <summary>
         ///     Creates a document in this wavelet.
         /// </summary>
         /// <param name="id">identifier of the document</param>
@@ -34,7 +41,7 @@ namespace WaveNET.Core.Model.Wave.Data
         /// <param name="lastModifiedVersion">version of last worthy modification</param>
         /// <returns></returns>
         IBlipData CreateDocument(string id, ParticipantId author, ICollection<ParticipantId> contributors,
-                                 IDocInitialization content, DateTime lastModifiedTime, long lastModifiedVersion);
+            IDocInitialization content, DateTime lastModifiedTime, long lastModifiedVersion);
 
         /// <summary>
         ///     Adds a participant to this wavelet, ensuring it is in the participants

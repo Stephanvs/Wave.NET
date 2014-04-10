@@ -36,7 +36,7 @@ namespace WaveNET.Core.Model.Operation.Wave
         /// </summary>
         /// <param name="target"></param>
         /// <returns>blip targeted by this operation, never null</returns>
-        private IReadableBlipData GetTargetBlip(IWaveletData target)
+        private IBlipData GetTargetBlip(IWaveletData target)
         {
             return target.GetDocument(BlipId) 
                 ?? target.CreateDocument(BlipId, Context.Creator,
@@ -45,7 +45,7 @@ namespace WaveNET.Core.Model.Operation.Wave
                     Context.Timestamp, target.Version + Context.VersionIncrement);            
         }
 
-        public override IEnumerable<WaveletOperation> ApplyAndReturnReverse(IWaveletData target)
+        public override IList<WaveletOperation> ApplyAndReturnReverse(IWaveletData target)
         {
             var blip = GetTargetBlip(target);
             var operations = BlipOp.ApplyAndReturnReverse(blip);

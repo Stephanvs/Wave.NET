@@ -29,7 +29,7 @@ namespace WaveNET.Core.Model.Operation.Wave
             _method = update;
         }
 
-        public override IEnumerable<BlipOperation> ApplyAndReturnReverse(IBlipData target)
+        public override IList<BlipOperation> ApplyAndReturnReverse(IBlipData target)
         {
             var reverseContext = CreateReverseContext(target);
             

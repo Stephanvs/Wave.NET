@@ -37,7 +37,7 @@ namespace WaveNET.Core.Model.Operation.Wave
             }
         }
 
-        public override IEnumerable<WaveletOperation> ApplyAndReturnReverse(IWaveletData target)
+        public override IList<WaveletOperation> ApplyAndReturnReverse(IWaveletData target)
         {
             WaveletOperationContext reverseContext = CreateReverseContext(target);
             DoApply(target);

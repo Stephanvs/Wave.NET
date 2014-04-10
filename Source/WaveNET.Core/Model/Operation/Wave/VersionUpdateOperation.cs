@@ -61,7 +61,7 @@ namespace WaveNET.Core.Model.Operation.Wave
             return new VersionUpdateOperation(Context.Creator, -Context.VersionIncrement, oldHashedVersion);
         }
 
-        public override IEnumerable<WaveletOperation> ApplyAndReturnReverse(IWaveletData target)
+        public override IList<WaveletOperation> ApplyAndReturnReverse(IWaveletData target)
         {
             var result = new ReadOnlyCollection<WaveletOperation>(new WaveletOperation[]
             {

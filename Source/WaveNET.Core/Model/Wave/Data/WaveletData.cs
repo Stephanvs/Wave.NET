@@ -21,7 +21,7 @@ namespace WaveNET.Core.Model.Wave.Data
         {
         }
 
-        public override IReadableBlipData GetDocument(string documentName)
+        public override IBlipData GetDocument(string documentName)
         {
             throw new NotImplementedException();
         }

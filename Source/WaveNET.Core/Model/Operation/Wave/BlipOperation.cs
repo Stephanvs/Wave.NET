@@ -53,7 +53,7 @@ namespace WaveNET.Core.Model.Operation.Wave
             DoUpdate(target);
         }
 
-        public abstract IEnumerable<BlipOperation> ApplyAndReturnReverse(IBlipData target);
+        public abstract IList<BlipOperation> ApplyAndReturnReverse(IBlipData target);
 
         public abstract void AcceptVisitor(IBlipOperationVisitor visitor);
 
