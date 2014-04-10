@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="bc53ccb2-fb56-4afe-b370-e52a17a9fc91" name="Operations" linkedPackageId="6fb81330-82ea-46e0-96e9-9ecc97c953b3" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="c7617892-cc7c-4bf7-b3f0-3d7bac8afe93">
+      <profileInstance Id="9c244b6a-2948-4090-aca7-ec1bf545c238" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="72891f0e-c97c-4b49-912a-4b5ed1eb3876">
+      <profileInstance Id="b5e5b07d-0b00-4acd-8ae4-7fd4b672a3eb" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="802892e7-428a-47eb-a1ee-866221f70e8a" name="WaveletBlipOperation" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="548f0ce2-6c94-4211-b2b8-c5340391b35f" />
+        <generalsInternal>
+          <generalization Id="396e29a4-f743-480c-86e0-0b33e6d4be3b" isSubstitutable="false">
+            <classMoniker Id="0702c088-515f-4562-9435-0443febe9449" LastKnownName="WaveletOperation" />
+            <elementDefinition Id="4f616cdb-69e5-44a7-81fa-eb2574f0c1f3" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="c9e91dd0-dcb3-4b0a-89e1-0ce7f09e0807" isDerived="false" sourceEndRoleName="WaveletBlipOperation" targetEndRoleName="BlipOperation" isLeaf="false" isAbstract="false">
+            <classMoniker Id="2b94f6a2-b422-4c27-be98-47c7be12d573" LastKnownName="BlipOperation" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="62ae3521-5ac5-4527-883d-0a5ecac270c1" name="WaveletBlipOperation" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="417534fe-88e1-4d0d-84f1-73cf25dc4095" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="66d9119a-f512-406e-95f3-ff37e71d27ec" name="BlipOperation" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="521abb2b-6fb8-46cb-98d2-3e215e6f6308" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="be59bdd1-6183-46c7-a14b-3d10d8ea2efe" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="4e1a2ead-6298-4c83-94ad-55d61bc52224" name="IOperation" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="58a04574-9c8d-41f5-9d6c-dc35f290d5f0" />
+        <ownedRedefinableTemplateSignatureInternal>
+          <redefinableTemplateSignature Id="439392c7-b852-43c1-a7bb-6a1d5865c74d" parameters="" isLeaf="false">
+            <elementDefinition Id="4c5dcaf7-9392-4ad5-b97e-6212407bd56e" />
+            <ownedParameters>
+              <classifierTemplateParameter Id="f3b60b24-d449-4b1a-92d6-f61044082ed5">
+                <elementDefinition Id="ba4e6ec0-3ac0-4587-a079-03c5184dfd8c" />
+                <ownedParameterableElement>
+                  <class Id="c004c565-93be-4a8a-9dc0-1128d3c8a82d" name="T" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="2c862cb5-60b6-46f2-8e52-daffb55d38af" />
+                  </class>
+                </ownedParameterableElement>
+              </classifierTemplateParameter>
+            </ownedParameters>
+          </redefinableTemplateSignature>
+        </ownedRedefinableTemplateSignatureInternal>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="0702c088-515f-4562-9435-0443febe9449" name="WaveletOperation" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="253f7841-4ebe-4b58-8fbd-5cfeff54e784" />
+        <suppliersInternal>
+          <interfaceRealization Id="73f51bbf-c8c3-45ab-9738-ae2f45a10dc1">
+            <interfaceMoniker Id="176b05ae-bf41-46a6-998e-076b566bb0db" LastKnownName="IReversableOperation" />
+            <elementDefinition Id="6faccb99-7c67-4f0b-9d78-8bafbda9af8f" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2b94f6a2-b422-4c27-be98-47c7be12d573" name="BlipOperation" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d7c90dc6-13df-4daf-9000-d8a685618bd5" />
+        <suppliersInternal>
+          <interfaceRealization Id="1964996a-2e0f-41bc-84a3-dc4a45ac55eb">
+            <interfaceMoniker Id="176b05ae-bf41-46a6-998e-076b566bb0db" LastKnownName="IReversableOperation" />
+            <elementDefinition Id="fcbe9544-c28f-4048-9a7e-a9639e99b76e" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="f5845251-3e8e-481d-93fc-e9476e7d8aa9" name="DocumentOperation" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="78ee7b4d-1547-4960-8f7b-338439820122" />
+        <suppliersInternal>
+          <interfaceRealization Id="a66cc643-9283-4fb3-a4fb-cf5bb8b4f40e">
+            <interfaceMoniker Id="176b05ae-bf41-46a6-998e-076b566bb0db" LastKnownName="IReversableOperation" />
+            <elementDefinition Id="d683eb6c-5069-4cda-9736-22b4268024f7" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="45937650-c5da-415e-b109-95984d79e866" name="BlipContentOperation" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a8458e2b-7305-49b4-b0e1-ec84a0bb9a34" />
+        <generalsInternal>
+          <generalization Id="4fab8a30-b2ae-45bf-9222-b0577f79eea1" isSubstitutable="false">
+            <classMoniker Id="2b94f6a2-b422-4c27-be98-47c7be12d573" LastKnownName="BlipOperation" />
+            <elementDefinition Id="1a7b3e0c-00a2-48a6-af33-43e9ee7e86ee" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="31c18ee0-3c9a-42af-bcef-570b29380d58" isDerived="false" sourceEndRoleName="BlipContentOperation" targetEndRoleName="DocumentOperation" isLeaf="false" isAbstract="false">
+            <classMoniker Id="f5845251-3e8e-481d-93fc-e9476e7d8aa9" LastKnownName="DocumentOperation" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c23b1d36-32fd-4b7e-8980-bafb037cfc53" name="BlipContentOperation" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="2b06076f-9462-443a-a6cd-b710cab312a2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="497b57ab-a714-41d2-9e97-326f405cf501" name="DocumentOperation" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="864216a2-d111-421e-9962-b01ed38a69dc" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="2b7a4b0c-e752-4810-a14a-5d5d2dccedce" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="176b05ae-bf41-46a6-998e-076b566bb0db" name="IReversableOperation" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5f5bd6f2-d7fb-4105-91c1-a066f6e9237e" />
+        <generalsInternal>
+          <generalization Id="fd670628-cae7-4f8a-8cdf-954660c830aa" isSubstitutable="false">
+            <interfaceMoniker Id="4e1a2ead-6298-4c83-94ad-55d61bc52224" LastKnownName="IOperation" />
+            <elementDefinition Id="37e98f80-9c93-4a54-aa87-d3c5ac144ce7" />
+          </generalization>
+        </generalsInternal>
+        <ownedRedefinableTemplateSignatureInternal>
+          <redefinableTemplateSignature Id="e7766d40-c628-48b5-b93f-1c82f864cd07" parameters="" isLeaf="false">
+            <elementDefinition Id="96135c12-489a-4f72-8e46-ec96cef6e830" />
+            <ownedParameters>
+              <classifierTemplateParameter Id="45ee75d8-e1b4-403a-b7c5-473284bb01d0">
+                <elementDefinition Id="eb51438f-45be-45a3-a02e-ba773d3d5b04" />
+                <ownedParameterableElement>
+                  <class Id="976b3769-96c9-4783-aed7-5f4a59f9da62" name="TOperation" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="1ee99804-8970-4173-989b-5d45acd8ab05" />
+                  </class>
+                </ownedParameterableElement>
+                <constrainingClassifier>
+                  <referencedTypeMoniker Id="27a4a06e-38fa-4e68-a1a8-1e1e4ec26d18" LastKnownName="IOperation" />
+                </constrainingClassifier>
+              </classifierTemplateParameter>
+              <classifierTemplateParameter Id="74698f09-2422-4cdc-a880-d695a7c1f191">
+                <elementDefinition Id="ace6508b-7329-47f6-9abe-1bc561ccd06e" />
+                <ownedParameterableElement>
+                  <class Id="19f1e487-02f6-47d9-a113-ac41333607fa" name="TTarget" isAbstract="false" isLeaf="false" isActiveClass="false">
+                    <elementDefinition Id="fd8b432f-4e09-457c-b380-844468c24434" />
+                  </class>
+                </ownedParameterableElement>
+              </classifierTemplateParameter>
+            </ownedParameters>
+          </redefinableTemplateSignature>
+        </ownedRedefinableTemplateSignatureInternal>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="27a4a06e-38fa-4e68-a1a8-1e1e4ec26d18" name="IOperation" isAbstract="false" isLeaf="false" cachedFullName="WaveNET.Architecture::IOperation">
+        <elementDefinition Id="58a04574-9c8d-41f5-9d6c-dc35f290d5f0" />
+      </referencedType>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="6fb81330-82ea-46e0-96e9-9ecc97c953b3" name="WaveNET.Architecture">
+    <elementDefinition Id="558f416e-3cf9-4929-9a2e-5975f88d1950" />
+  </package>
+</logicalClassDesignerModel>
