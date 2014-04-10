@@ -14,12 +14,12 @@ namespace WaveNET.Core.Model.Wave.Data
         new IWaveletData Wavelet { get; }
 
         /// <summary>
-        ///     Sets the last-modified time of this blip
+        ///     Gets or sets the last-modified time of this blip
         /// </summary>
         new DateTime LastModifiedTime { get; set; }
 
         /// <summary>
-        ///     Sets the last-modified version of this blip.
+        ///     Gets or sets the last-modified version of this blip.
         /// </summary>
         new long LastModifiedVersion { get; set; }
 
