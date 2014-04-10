@@ -29,7 +29,7 @@ namespace WaveNET.Core.Model.Operation.Wave
                     ParticipantId));
         }
 
-        public override IList<WaveletOperation> ApplyAndReturnReverse(IWaveletData target)
+        public override IEnumerable<WaveletOperation> ApplyAndReturnReverse(IWaveletData target)
         {
             WaveletOperationContext reverseContext = CreateReverseContext(target);
             int position = DetermineParticipantPosition(target);

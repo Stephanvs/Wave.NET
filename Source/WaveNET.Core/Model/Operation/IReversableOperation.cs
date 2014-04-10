@@ -9,7 +9,8 @@ namespace WaveNET.Core.Model.Operation
     /// <typeparam name="TOperation">The Operation</typeparam>
     /// <typeparam name="TTarget">The type on which Apply() and ApplyAndReturnReverse() can be called</typeparam>
     public interface IReversableOperation<TOperation, in TTarget>
-        : IOperation<TTarget> where TOperation : IOperation<TTarget>
+        : IOperation<TTarget>
+            where TOperation : IOperation<TTarget>
     {
         /// <summary>
         ///     Applies the operation to a target and returns a sequence of operations
@@ -21,6 +22,6 @@ namespace WaveNET.Core.Model.Operation
         ///     The returned sequence of operations, when applied in order after this operation is applied, should reverse the
         ///     effect of this operation
         /// </remarks>
-        IList<TOperation> ApplyAndReturnReverse(TTarget target);
+        IEnumerable<TOperation> ApplyAndReturnReverse(TTarget target);
     }
 }

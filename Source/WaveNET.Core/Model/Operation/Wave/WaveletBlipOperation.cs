@@ -45,7 +45,7 @@ namespace WaveNET.Core.Model.Operation.Wave
                     Context.Timestamp, target.Version + Context.VersionIncrement);            
         }
 
-        public override IList<WaveletOperation> ApplyAndReturnReverse(IWaveletData target)
+        public override IEnumerable<WaveletOperation> ApplyAndReturnReverse(IWaveletData target)
         {
             var blip = GetTargetBlip(target);
             var operations = BlipOp.ApplyAndReturnReverse(blip);
