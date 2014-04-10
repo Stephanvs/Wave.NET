@@ -25,9 +25,6 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
             var serverOperation = new RemoveParticipantOperation(contextA, John);
 
             Assert.Throws<RemovedAuthorException>(() => Transformer.Transform(clientOperation, serverOperation));
-
-            //OperationPair<WaveletOperation> operationPair = ;
-            //fail("Expected exception not thrown.");
         }
     }
 }
