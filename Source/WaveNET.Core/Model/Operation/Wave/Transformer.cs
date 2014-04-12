@@ -1,5 +1,6 @@
 ﻿using System;
 using WaveNET.Core.Model.Document.Operation;
+using WaveNET.Core.Utils;
 
 namespace WaveNET.Core.Model.Operation.Wave
 {
@@ -19,6 +20,9 @@ namespace WaveNET.Core.Model.Operation.Wave
         public static OperationPair<WaveletOperation> Transform(WaveletOperation clientOperation,
                                                                 WaveletOperation serverOperation)
         {
+            Preconditions.CheckNotNull(clientOperation);
+            Preconditions.CheckNotNull(serverOperation);
+
             //if (clientOperation is WaveletDocumentOperation && serverOperation is WaveletDocumentOperation)
             //{
             //    var clientWaveDocOp = (WaveletDocumentOperation)clientOperation;
