@@ -1,5 +1,6 @@
-﻿using System;
-using WaveNET.Core.Model.Document.Operation;
+﻿using WaveNET.Core.Model.Document.Operation;
+using WaveNET.Core.Model.Document.Operation.Algorithm;
+using WaveNET.Core.Model.Wave;
 using WaveNET.Core.Utils;
 
 namespace WaveNET.Core.Model.Operation.Wave
@@ -18,79 +19,145 @@ namespace WaveNET.Core.Model.Operation.Wave
         /// <param name="serverOperation">The server's operation.</param>
         /// <returns>The resulting transformed client and server operations.</returns>
         public static OperationPair<WaveletOperation> Transform(WaveletOperation clientOperation,
-                                                                WaveletOperation serverOperation)
+            WaveletOperation serverOperation)
         {
             Preconditions.CheckNotNull(clientOperation);
             Preconditions.CheckNotNull(serverOperation);
 
-            //if (clientOperation is WaveletDocumentOperation && serverOperation is WaveletDocumentOperation)
-            //{
-            //    var clientWaveDocOp = (WaveletDocumentOperation)clientOperation;
-            //    var serverWaveDocOp = (WaveletDocumentOperation)serverOperation;
-            //    if (clientWaveDocOp.DocumentId.Equals(serverWaveDocOp.DocumentId))
-            //    {
-            //        // Transform document operations
-            //        IBufferedDocOp clientMutation = clientWaveDocOp.Operation;
-            //        IBufferedDocOp serverMutation = serverWaveDocOp.Operation;
-            //        OperationPair<BufferedDocOp> transformedDocOps = Transformer.Transform(clientMutation,
-            //            serverMutation);
+            if (clientOperation is WaveletBlipOperation && serverOperation is WaveletBlipOperation)
+            {
+                var clientWaveBlipOp = (WaveletBlipOperation) clientOperation;
+                var serverWaveBlipOp = (WaveletBlipOperation) serverOperation;
 
-            //        // Only recreate boxes if transform did something.  Yes, this is != not !.equals
-            //        if (transformedDocOps.ClientOperation != clientMutation)
-            //        {
-            //            clientOperation = transformedDocOps.ClientOperation != null
-            //                ? new WaveletDocumentOperation(clientWaveDocOp.DocumentId, transformedDocOps.ClientOperation)
-            //                : null;
-            //        }
-            //        if (transformedDocOps.ServerOperation != serverMutation)
-            //        {
-            //            serverOperation = transformedDocOps.ServerOperation != null
-            //                ? new WaveletDocumentOperation(serverWaveDocOp.DocumentId, transformedDocOps.ServerOperation)
-            //                : null;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    if (serverOperation is RemoveParticipantOperation)
-            //    {
-            //        if (clientOperation is RemoveParticipantOperation)
-            //        {
-            //            ParticipantId clientParticipant = ((RemoveParticipantOperation) clientOperation).Participant;
-            //            ParticipantId serverParticipant = ((RemoveParticipantOperation) serverOperation).Participant;
-            //            if (clientParticipant.Equals(serverParticipant))
-            //            {
-            //                clientOperation = null;
-            //                serverOperation = null;
-            //            }
-            //        }
-            //        else if (clientOperation is AddParticipantOperation)
-            //        {
-            //            CheckParticipantRemovalAndAddition((RemoveParticipantOperation) serverOperation,
-            //                (AddParticipantOperation) clientOperation);
-            //        }
-            //    }
-            //    else if (serverOperation is AddParticipantOperation)
-            //    {
-            //        if (clientOperation is AddParticipantOperation)
-            //        {
-            //            ParticipantId clientParticipant = ((AddParticipantOperation) clientOperation).Participant;
-            //            ParticipantId serverParticipant = ((AddParticipantOperation) serverOperation).Participant;
-            //            if (clientParticipant.Equals(serverParticipant))
-            //            {
-            //                clientOperation = null;
-            //                serverOperation = null;
-            //            }
-            //        }
-            //        else if (clientOperation is RemoveParticipantOperation)
-            //        {
-            //            CheckParticipantRemovalAndAddition((RemoveParticipantOperation) clientOperation,
-            //                (AddParticipantOperation) serverOperation);
-            //        }
-            //    }
-            //}
-            //// Apply identity transform by default
+                if (clientWaveBlipOp.BlipId.Equals(serverWaveBlipOp.BlipId))
+                {
+                    // Transform document operations
+                    BlipOperation clientBlipOp = clientWaveBlipOp.BlipOp;
+                    BlipOperation serverBlipOp = serverWaveBlipOp.BlipOp;
+
+                    OperationPair<BlipOperation> transformedBlipOps = Transform(clientBlipOp, serverBlipOp);
+
+                    clientOperation = new WaveletBlipOperation(clientWaveBlipOp.BlipId,
+                        transformedBlipOps.ClientOperation);
+                    serverOperation = new WaveletBlipOperation(serverWaveBlipOp.BlipId,
+                        transformedBlipOps.ServerOperation);
+                }
+            }
+            else
+            {
+                if (serverOperation is RemoveParticipantOperation)
+                {
+                    var serverRemoveOp = serverOperation as RemoveParticipantOperation;
+                    CheckParticipantRemoval(serverRemoveOp, clientOperation);
+
+                    if (clientOperation is RemoveParticipantOperation)
+                    {
+                        var clientRemoveOp = clientOperation as RemoveParticipantOperation;
+                        if (clientRemoveOp.ParticipantId.Equals(serverRemoveOp.ParticipantId))
+                        {
+                            clientOperation = new NoOp(clientRemoveOp.Context);
+                            serverOperation = new NoOp(serverRemoveOp.Context);
+                        }
+                    }
+                    else if (clientOperation is AddParticipantOperation)
+                    {
+                        CheckParticipantRemovalAndAddition(serverRemoveOp, clientOperation as AddParticipantOperation);
+                    }
+                }
+                else if (serverOperation is AddParticipantOperation)
+                {
+                    var serverAddOp = serverOperation as AddParticipantOperation;
+
+                    if (clientOperation is AddParticipantOperation)
+                    {
+                        var clientAddOp = clientOperation as AddParticipantOperation;
+
+                        if (clientAddOp.ParticipantId.Equals(serverAddOp.ParticipantId))
+                        {
+                            clientOperation = new NoOp(clientAddOp.Context);
+                            serverOperation = new NoOp(serverAddOp.Context);
+                        }
+                    }
+                    else if (clientOperation is RemoveParticipantOperation)
+                    {
+                        CheckParticipantRemovalAndAddition(
+                            clientOperation as RemoveParticipantOperation,
+                            serverOperation as AddParticipantOperation);
+                    }
+                }
+            }
+
+            // Apply identity transform by default
             return new OperationPair<WaveletOperation>(clientOperation, serverOperation);
+        }
+
+        public static OperationPair<BlipOperation> Transform(BlipOperation clientOperation,
+            BlipOperation serverOperation)
+        {
+            if (clientOperation is BlipContentOperation && serverOperation is BlipContentOperation)
+            {
+                var clientBlipContentOp = (BlipContentOperation) clientOperation;
+                var serverBlipContentOp = (BlipContentOperation) serverOperation;
+                var clientContentOp = clientBlipContentOp.ContentOp;
+                var serverContentOp = serverBlipContentOp.ContentOp;
+
+                var transformedDocOps = Transform(clientContentOp, serverContentOp);
+
+                clientOperation = new BlipContentOperation(clientBlipContentOp.Context,
+                    transformedDocOps.ClientOperation);
+                serverOperation = new BlipContentOperation(serverBlipContentOp.Context,
+                    transformedDocOps.ServerOperation);
+            }
+
+            // Apply identity transform by default
+            return new OperationPair<BlipOperation>(clientOperation, serverOperation);
+        }
+
+        /// <summary>
+        ///     Transforms a pair of operations.
+        /// </summary>
+        /// <param name="clientOperation">the operation from the client</param>
+        /// <param name="serverOperation">the operation from the server</param>
+        /// <returns>the transformed pair of operations</returns>
+        public static OperationPair<IDocOp> Transform(IDocOp clientOperation, IDocOp serverOperation)
+        {
+            // The transform process consists of decomposing the client and server
+            // operations into two constituent operations each and performing four
+            // transforms structured as in the following diagram:
+            //     ci0     cn0
+            // si0     si1     si2
+            //     ci1     cn1
+            // sn0     sn1     sn2
+            //     ci2     cn2
+            //
+            try
+            {
+                var c = Decomposer.Decompose(clientOperation);
+                var s = Decomposer.Decompose(serverOperation);
+
+                var r1 = new InsertionTransformer().TransformOperations(c.Item1, s.Item1);
+                var r2 = new InsertionNoninsertionTransformer().TransformOperations(r1.ClientOperation, s.Item2);
+                var r3 = new InsertionNoninsertionTransformer().TransformOperations(r1.ServerOperation, c.Item2);
+                var r4 = new NoninsertionTransformer().TransformOperations(r3.ServerOperation, r2.ServerOperation);
+
+                return new OperationPair<IDocOp>(
+                    Composer.Compose(r2.ClientOperation, r4.ClientOperation),
+                    Composer.Compose(r3.ClientOperation, r4.ServerOperation));
+            }
+            catch (OperationException e)
+            {
+                throw new TransformException(e.Message, e);
+            }
+        }
+
+        private static void CheckParticipantRemoval(RemoveParticipantOperation removeOperation,
+            WaveletOperation operation)
+        {
+            ParticipantId participantId = removeOperation.ParticipantId;
+            if (participantId.Equals(operation.Context.Creator))
+            {
+                throw new RemovedAuthorException(participantId.Address);
+            }
         }
 
         /// <summary>
@@ -105,7 +172,7 @@ namespace WaveNET.Core.Model.Operation.Wave
         ///     removed.
         /// </exception>
         private static void CheckParticipantRemovalAndAddition(RemoveParticipantOperation removeOperation,
-                                                               AddParticipantOperation addOperation)
+            AddParticipantOperation addOperation)
         {
             if (removeOperation.ParticipantId.Equals(addOperation.ParticipantId))
                 throw new TransformException("Transform error involving participant: " +

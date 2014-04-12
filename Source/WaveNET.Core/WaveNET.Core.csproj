@@ -87,9 +87,16 @@
     <Compile Include="Model\Document\Bootstrap\BootstrapDocument.cs" />
     <Compile Include="Model\Document\Operation\AbstractBufferedDocInitialization.cs" />
     <Compile Include="Model\Document\Operation\AbstractDocInitialization.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\AnnotationsNormalizer.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\ComposeException.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\Composer.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\Decomposer.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\DocOpInverter.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\InsertionNoninsertionTransformer.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\InsertionTransformer.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\NoninsertionTransformer.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\OperationNormalizer.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\RangeNormalizer.cs" />
     <Compile Include="Model\Document\Operation\Automation\IAutomationDocument.cs" />
     <Compile Include="Model\Document\Operation\Automation\ViolationCollector.cs" />
     <Compile Include="Model\Document\Operation\BufferedDocOp.cs" />
