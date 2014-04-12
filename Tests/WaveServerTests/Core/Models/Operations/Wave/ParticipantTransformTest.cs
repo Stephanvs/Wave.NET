@@ -14,6 +14,9 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
         private static readonly ParticipantId John = new ParticipantId("john@example.com");
         private static readonly ParticipantId Marc = new ParticipantId("marc@example.com");
 
+        /// <summary>
+        /// Tests that the correct exception is thrown when a removed participant issues an operation.
+        /// </summary>
         [Fact]
         public void RemovedAuthorException()
         {
