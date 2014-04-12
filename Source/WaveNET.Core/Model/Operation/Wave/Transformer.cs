@@ -1,4 +1,5 @@
-﻿using WaveNET.Core.Model.Document.Operation;
+﻿using System;
+using WaveNET.Core.Model.Document.Operation;
 using WaveNET.Core.Model.Document.Operation.Algorithm;
 using WaveNET.Core.Model.Wave;
 using WaveNET.Core.Utils;
@@ -98,10 +99,10 @@ namespace WaveNET.Core.Model.Operation.Wave
             {
                 var clientBlipContentOp = (BlipContentOperation) clientOperation;
                 var serverBlipContentOp = (BlipContentOperation) serverOperation;
-                var clientContentOp = clientBlipContentOp.ContentOp;
-                var serverContentOp = serverBlipContentOp.ContentOp;
+                IDocOp clientContentOp = clientBlipContentOp.ContentOp;
+                IDocOp serverContentOp = serverBlipContentOp.ContentOp;
 
-                var transformedDocOps = Transform(clientContentOp, serverContentOp);
+                OperationPair<IDocOp> transformedDocOps = Transform(clientContentOp, serverContentOp);
 
                 clientOperation = new BlipContentOperation(clientBlipContentOp.Context,
                     transformedDocOps.ClientOperation);
@@ -132,13 +133,16 @@ namespace WaveNET.Core.Model.Operation.Wave
             //
             try
             {
-                var c = Decomposer.Decompose(clientOperation);
-                var s = Decomposer.Decompose(serverOperation);
+                Tuple<IDocOp, IDocOp> c = Decomposer.Decompose(clientOperation);
+                Tuple<IDocOp, IDocOp> s = Decomposer.Decompose(serverOperation);
 
-                var r1 = new InsertionTransformer().TransformOperations(c.Item1, s.Item1);
-                var r2 = new InsertionNoninsertionTransformer().TransformOperations(r1.ClientOperation, s.Item2);
-                var r3 = new InsertionNoninsertionTransformer().TransformOperations(r1.ServerOperation, c.Item2);
-                var r4 = new NoninsertionTransformer().TransformOperations(r3.ServerOperation, r2.ServerOperation);
+                OperationPair<IDocOp> r1 = new InsertionTransformer().TransformOperations(c.Item1, s.Item1);
+                OperationPair<IDocOp> r2 = new InsertionNoninsertionTransformer().TransformOperations(
+                    r1.ClientOperation, s.Item2);
+                OperationPair<IDocOp> r3 = new InsertionNoninsertionTransformer().TransformOperations(
+                    r1.ServerOperation, c.Item2);
+                OperationPair<IDocOp> r4 = new NoninsertionTransformer().TransformOperations(r3.ServerOperation,
+                    r2.ServerOperation);
 
                 return new OperationPair<IDocOp>(
                     Composer.Compose(r2.ClientOperation, r4.ClientOperation),
