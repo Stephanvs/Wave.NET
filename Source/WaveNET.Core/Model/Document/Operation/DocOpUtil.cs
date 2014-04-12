@@ -20,9 +20,10 @@ namespace WaveNET.Core.Model.Document.Operation
         public static IDocInitialization AsInitialization(IBufferedDocOp bufferedDocOp)
         {
             if (bufferedDocOp is IDocInitialization)
+            {
                 return (IDocInitialization) bufferedDocOp;
-
-            throw new NotImplementedException();
+            }
+            return new BufferedDocInitialization(bufferedDocOp);
         }
     }
 }

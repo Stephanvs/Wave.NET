@@ -99,6 +99,7 @@
     <Compile Include="Model\Document\Operation\Algorithm\RangeNormalizer.cs" />
     <Compile Include="Model\Document\Operation\Automation\IAutomationDocument.cs" />
     <Compile Include="Model\Document\Operation\Automation\ViolationCollector.cs" />
+    <Compile Include="Model\Document\Operation\BufferedDocInitialization.cs" />
     <Compile Include="Model\Document\Operation\BufferedDocOp.cs" />
     <Compile Include="Model\Document\Operation\DocInitializationBuilder.cs" />
     <Compile Include="Model\Document\Operation\DocInitializationComponentType.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Model\Document\Operation\IEvaluatingDocOpCursor.cs" />
     <Compile Include="Model\Document\Operation\IIsDocOp.cs" />
     <Compile Include="Model\Document\Operation\IModifiableDocument.cs" />
+    <Compile Include="Model\Document\Operation\InitializationCursorAdapter.cs" />
     <Compile Include="Model\Document\Operation\OpComparators.cs" />
     <Compile Include="Model\Document\Operation\OperationComponents.cs" />
     <Compile Include="Model\Document\Operation\UncheckedDocOpBuffer.cs" />

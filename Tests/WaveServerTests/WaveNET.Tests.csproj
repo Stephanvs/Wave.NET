@@ -64,6 +64,8 @@
     <Compile Include="Core\Models\Ids\WaveletNameTests.cs" />
     <Compile Include="Core\Models\Operations\Core\CoreOperationsTests.cs" />
     <Compile Include="Core\Models\Operations\Wave\AddParticipantTest.cs" />
+    <Compile Include="Core\Models\Operations\Wave\BlipContentOperationTest.cs" />
+    <Compile Include="Core\Models\Operations\Wave\OperationTestBase.cs" />
     <Compile Include="Core\Models\Operations\Wave\ParticipantTransformTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
