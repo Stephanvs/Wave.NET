@@ -112,12 +112,28 @@ namespace WaveNET.Core.Model.Operation.Wave
             {
                 case UpdateContributorMethod.Add:
                 {
-                    throw new NotImplementedException();
+                    if (!target.Contributors.Contains(Context.Creator))
+                    {
+                        target.AddContributor(Context.Creator);
+                        reverse = UpdateContributorMethod.Remove;
+                    }
+                    else
+                    {
+                        reverse = UpdateContributorMethod.None;
+                    }
                     break;
                 }
                 case UpdateContributorMethod.Remove:
                 {
-                    throw new NotImplementedException();
+                    if (target.Contributors.Contains(Context.Creator))
+                    {
+                        target.RemoveContributor(Context.Creator);
+                        reverse = UpdateContributorMethod.Add;
+                    }
+                    else
+                    {
+                        reverse = UpdateContributorMethod.None;
+                    }
                     break;
                 }
                 default:

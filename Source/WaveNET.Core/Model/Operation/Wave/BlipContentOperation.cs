@@ -67,7 +67,7 @@ namespace WaveNET.Core.Model.Operation.Wave
 
         protected override bool UpdatesBlipMetadata(string blipId)
         {
-            throw new System.NotImplementedException();
+            return IsWorthyOfAttribution(blipId);
         }
     }
 }
