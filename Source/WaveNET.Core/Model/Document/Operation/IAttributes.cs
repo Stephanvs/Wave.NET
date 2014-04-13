@@ -1,4 +1,7 @@
-﻿namespace WaveNET.Core.Model.Document.Operation
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace WaveNET.Core.Model.Document.Operation
 {
     /// <summary>
     ///     A set of attributes, implemented as a map from attribute names to attribute
@@ -8,6 +11,7 @@
     ///     Implementations must be immutable.
     /// </summary>
     public interface IAttributes
+        : IDictionary<string, string>
     {
         IAttributes UpdateWith(IAttributesUpdate mutation);
 
