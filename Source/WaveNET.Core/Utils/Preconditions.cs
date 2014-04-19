@@ -15,5 +15,21 @@ namespace WaveNET.Core.Utils
             if (string.IsNullOrEmpty(val))
                 throw new ArgumentNullException("val", msg ?? "Argument cannot be null or empty");
         }
+
+        public static void CheckArgument(bool condition, string errorMessage)
+        {
+            if (!condition)
+            {
+                throw new ArgumentException(errorMessage);
+            }
+        }
+
+        public static void CheckArgument(bool condition, string messageFormat, params object[] errorMessages)
+        {
+            if (!condition)
+            {
+                throw new ArgumentException(string.Format(messageFormat, errorMessages));
+            }
+        }
     }
 }

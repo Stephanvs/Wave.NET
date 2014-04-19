@@ -8,12 +8,14 @@ using WaveNET.Core.Model.Version;
 
 namespace WaveNET.Core.Model.Wave.Data
 {
-    public abstract class AbstractWaveletData<T>
-        : IWaveletData
-        where T : IBlipData
+    public abstract class AbstractWaveletData<TData>
+        : IWaveletData<TData>
+        where TData : IBlipData
     {
+        private readonly IDocumentFactory _contentFactory;
+
         protected AbstractWaveletData(WaveletId waveletId, ParticipantId creator, DateTime creationTime, long version,
-            HashedVersion hashedVersion, DateTime lastModifiedTime, WaveId waveId)
+            HashedVersion hashedVersion, DateTime lastModifiedTime, WaveId waveId, IDocumentFactory contentFactory)
         {
             WaveletId = waveletId;
             Creator = creator;
@@ -22,20 +24,33 @@ namespace WaveNET.Core.Model.Wave.Data
             HashedVersion = hashedVersion;
             LastModifiedTime = lastModifiedTime;
             WaveId = waveId;
+            _contentFactory = contentFactory;
         }
 
-        protected AbstractWaveletData(IReadableWaveletData data)
+        protected AbstractWaveletData(IReadableWaveletData data, IDocumentFactory contentFactory)
             : this(
                 data.WaveletId, data.Creator, data.CreationTime, data.Version, data.HashedVersion, data.LastModifiedTime,
-                data.WaveId)
+                data.WaveId, contentFactory)
         {
         }
 
         public WaveletId WaveletId { get; protected set; }
 
-        public abstract IBlipData GetDocument(string documentName);
+        public abstract TData GetDocument(string documentName);
+
+        IBlipData IWaveletData.CreateDocument(string docId, ParticipantId author,
+            ICollection<ParticipantId> contributors, IDocInitialization content,
+            DateTime lastModifiedTime, long lastModifiedVersion)
+        {
+            return CreateDocument(docId, author, contributors, content, lastModifiedTime, lastModifiedVersion);
+        }
 
         IReadableBlipData IReadableWaveletData.GetDocument(string documentName)
+        {
+            return GetDocument(documentName);
+        }
+
+        IBlipData IWaveletData.GetDocument(string documentName)
         {
             return GetDocument(documentName);
         }
@@ -51,11 +66,16 @@ namespace WaveNET.Core.Model.Wave.Data
 
         public DateTime CreationTime { get; protected set; }
 
-        public IBlipData CreateDocument(string id, ParticipantId author, ICollection<ParticipantId> contributors,
+        public TData CreateDocument(string docId, ParticipantId author, ICollection<ParticipantId> contributors,
             IDocInitialization content,
             DateTime lastModifiedTime, long lastModifiedVersion)
         {
-            throw new NotImplementedException();
+            var sink = _contentFactory.Create<IDocumentOperationSink>(WaveletId, docId, content);
+            var doc = InternalCreateDocument(docId, author, contributors, sink, lastModifiedTime, lastModifiedVersion);
+
+            // todo: notify listeners or use ObservableCollection?
+
+            return doc;
         }
 
         public bool AddParticipant(ParticipantId participant)
@@ -107,5 +127,9 @@ namespace WaveNET.Core.Model.Wave.Data
         public WaveId WaveId { get; protected set; }
 
         protected abstract IList<ParticipantId> GetMutableParticipants();
+
+        protected abstract TData InternalCreateDocument(string docId, ParticipantId author,
+            ICollection<ParticipantId> contributors, IDocumentOperationSink contentSink, DateTime lastModifiedTime,
+            long lastModifiedVersion);
     }
 }

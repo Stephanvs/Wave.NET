@@ -50,4 +50,7 @@ Global
 		{5853A40B-6757-49F2-8C0B-67EE10073B77} = {542E3E63-CFB5-4EC1-885D-0A5F6F2C07CD}
 		{96DE5612-A373-4EA6-A2C2-08E0FA164C02} = {78F25EED-BE21-4DA4-90D8-FE089AAB07C4}
 	EndGlobalSection
+	GlobalSection(NDepend) = preSolution
+		Project = ".\NDepend\WaveNET.ndproj"
+	EndGlobalSection
 EndGlobal

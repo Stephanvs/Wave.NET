@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using FakeItEasy;
 using WaveNET.Core.Model.Operation.Wave;
-using WaveNET.Core.Model.Version;
 using WaveNET.Core.Model.Wave;
 using WaveNET.Core.Model.Wave.Data;
 
@@ -15,7 +15,7 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
         protected List<ParticipantId> NoParticipants = new List<ParticipantId>();
 
         protected WaveletOperationContext Context;
-        protected WaveletData WaveletData;
+        protected IWaveletData WaveletData;
 
         protected static readonly DateTime CreationTimestamp = DateTime.UtcNow;
         protected static readonly DateTime LastModifiedTimestamp = CreationTimestamp.AddSeconds(10);
@@ -26,6 +26,7 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
         public OperationTestBase()
         {
             Context = new WaveletOperationContext(Fred, ContextTimestamp, 1);
+            WaveletData = A.Fake<IWaveletData>();
         }
     }
 }

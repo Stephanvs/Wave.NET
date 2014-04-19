@@ -5,6 +5,15 @@ using WaveNET.Core.Model.Version;
 
 namespace WaveNET.Core.Model.Wave.Data
 {
+    public interface IWaveletData<out TData>
+        : IWaveletData
+    {
+        new TData GetDocument(string documentName);
+
+        new TData CreateDocument(string docId, ParticipantId author, ICollection<ParticipantId> contributors,
+            IDocInitialization content, DateTime lastModifiedTime, long lastModifiedVersion);
+    }
+
     public interface IWaveletData
         : IReadableWaveletData
     {
@@ -33,14 +42,14 @@ namespace WaveNET.Core.Model.Wave.Data
         /// <summary>
         ///     Creates a document in this wavelet.
         /// </summary>
-        /// <param name="id">identifier of the document</param>
+        /// <param name="docId">identifier of the document</param>
         /// <param name="author">author of the new document</param>
         /// <param name="contributors">participants who have contributed to the document</param>
         /// <param name="content">initial content of the document</param>
         /// <param name="lastModifiedTime">time of last worthy modification</param>
         /// <param name="lastModifiedVersion">version of last worthy modification</param>
         /// <returns></returns>
-        IBlipData CreateDocument(string id, ParticipantId author, ICollection<ParticipantId> contributors,
+        IBlipData CreateDocument(string docId, ParticipantId author, ICollection<ParticipantId> contributors,
             IDocInitialization content, DateTime lastModifiedTime, long lastModifiedVersion);
 
         /// <summary>

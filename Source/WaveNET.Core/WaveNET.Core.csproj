@@ -160,8 +160,11 @@
     <Compile Include="Model\Operation\Wave\WaveletOperation.cs" />
     <Compile Include="Model\Operation\Wave\WaveletOperationContext.cs" />
     <Compile Include="Model\Version\HashedVersion.cs" />
+    <Compile Include="Model\Wave\Data\AbstractBlipData.cs" />
     <Compile Include="Model\Wave\Data\AbstractWaveletData.cs" />
+    <Compile Include="Model\Wave\Data\BlipData.cs" />
     <Compile Include="Model\Wave\Data\IBlipData.cs" />
+    <Compile Include="Model\Wave\Data\IDocumentFactory.cs" />
     <Compile Include="Model\Wave\Data\IDocumentOperationSink.cs" />
     <Compile Include="Model\Wave\Data\IReadableBlipData.cs" />
     <Compile Include="Model\Wave\Data\IReadableWaveletData.cs" />
