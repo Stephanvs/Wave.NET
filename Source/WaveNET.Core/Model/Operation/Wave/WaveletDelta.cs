@@ -35,7 +35,6 @@ namespace WaveNET.Core.Model.Operation.Wave
         public IList<WaveletOperation> Operations
         {
             get { return new ReadOnlyCollection<WaveletOperation>(_operations.ToArray()); }
-            private set { }
         }
 
         public override int GetHashCode()

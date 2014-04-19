@@ -9,6 +9,9 @@ namespace WaveNET.Core.Model.Operation.Wave
     /// </summary>
     public class WaveletOperationContext
     {
+        /// <summary>
+        /// Method used for tests (todo: cleanup dependency injections)
+        /// </summary>
         internal WaveletOperationContext()
         {
         }
