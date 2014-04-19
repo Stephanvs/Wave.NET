@@ -19,6 +19,7 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
         private static readonly ParticipantId Another = new ParticipantId("another@example.com");
         private static readonly ParticipantId AThird = new ParticipantId("athird@example.com");
         private static readonly IDocumentFactory FakeFactory = A.Fake<IDocumentFactory>();
+        private static readonly HashedVersion HashedVersion = HashedVersion.Of(4L, new byte[] { 4, 4, 4, 4 });
 
         [Fact]
         public void ReverseOfAddParticipantIsRemoveParticipant()
@@ -92,7 +93,7 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
             WaveId waveId = WaveId.Of("example.com", "c+123");
             WaveletId waveletId = WaveletId.Of("example.com", IdConstants.ConversationRootWavelet);
 
-            var wavelet = new WaveletData(waveletId, Creator, DateTime.UtcNow.AddMinutes(-1), 1, new HashedVersion(),
+            var wavelet = new WaveletData(waveletId, Creator, DateTime.UtcNow.AddMinutes(-1), 1, HashedVersion,
                 DateTime.UtcNow, waveId, FakeFactory);
 
             var context = A.Fake<WaveletOperationContext>();
@@ -126,7 +127,7 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
             WaveId waveId = WaveId.Of("example.com", "c+123");
             WaveletId waveletId = WaveletId.Of("example.com", IdConstants.ConversationRootWavelet);
 
-            return new WaveletData(waveletId, Creator, DateTime.UtcNow.AddMinutes(-1), 1, new HashedVersion(),
+            return new WaveletData(waveletId, Creator, DateTime.UtcNow.AddMinutes(-1), 1, HashedVersion,
                 DateTime.UtcNow, waveId, FakeFactory);
         }
     }

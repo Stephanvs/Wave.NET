@@ -68,6 +68,7 @@
     <Compile Include="Core\Models\Operations\Wave\OperationTestBase.cs" />
     <Compile Include="Core\Models\Operations\Wave\ParticipantTransformTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Testing\WaveletDataFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\WaveNET.Core\WaveNET.Core.csproj">

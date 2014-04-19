@@ -163,12 +163,15 @@
     <Compile Include="Model\Wave\Data\AbstractBlipData.cs" />
     <Compile Include="Model\Wave\Data\AbstractWaveletData.cs" />
     <Compile Include="Model\Wave\Data\BlipData.cs" />
+    <Compile Include="Model\Wave\Data\EmptyWaveletSnapshot.cs" />
     <Compile Include="Model\Wave\Data\IBlipData.cs" />
     <Compile Include="Model\Wave\Data\IDocumentFactory.cs" />
     <Compile Include="Model\Wave\Data\IDocumentOperationSink.cs" />
+    <Compile Include="Model\Wave\Data\IReadableWaveletDataFactory.cs" />
     <Compile Include="Model\Wave\Data\IReadableBlipData.cs" />
     <Compile Include="Model\Wave\Data\IReadableWaveletData.cs" />
     <Compile Include="Model\Wave\Data\IWaveletData.cs" />
+    <Compile Include="Model\Wave\Data\IWaveletDataFactory.cs" />
     <Compile Include="Model\Wave\Data\IWaveViewData.cs" />
     <Compile Include="Model\Wave\Data\WaveletData.cs" />
     <Compile Include="Model\Wave\Data\WaveViewData.cs" />

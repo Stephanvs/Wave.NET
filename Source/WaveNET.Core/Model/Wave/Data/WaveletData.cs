@@ -10,6 +10,31 @@ namespace WaveNET.Core.Model.Wave.Data
     public class WaveletData 
         : AbstractWaveletData<IBlipData>
     {
+        public class WaveletDataFactory 
+            : IReadableWaveletDataFactory<IWaveletData>
+        {
+            private readonly IDocumentFactory _documentFactory;
+
+            private WaveletDataFactory(IDocumentFactory documentFactory)
+            {
+                Preconditions.CheckNotNull(documentFactory, "null DocumentFactory");
+                _documentFactory = documentFactory;
+            }
+
+            public static WaveletDataFactory Create(IDocumentFactory documentFactory) {
+                return new WaveletDataFactory(documentFactory);
+            }
+
+            public IWaveletData Create(IReadableWaveletData data)
+            {
+                var waveletData = new WaveletData(data, _documentFactory);
+                // Todo: implement copy methods
+                //waveletData.CopyParticipants(data);
+                //waveletData.CopyDocuments(data);
+                return waveletData;
+            }
+        }
+
         private readonly IList<ParticipantId> _participants = new Collection<ParticipantId>();
         private readonly IDictionary<string, IBlipData> _documents = new Dictionary<string, IBlipData>(); 
 

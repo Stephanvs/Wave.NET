@@ -1,8 +1,11 @@
 ﻿using System;
+using FakeItEasy;
 using FluentAssertions;
 using WaveNET.Core.Model.Document.Operation;
 using WaveNET.Core.Model.Document.Util;
 using WaveNET.Core.Model.Operation.Wave;
+using WaveNET.Core.Model.Wave.Data;
+using WaveNET.Tests.Testing;
 using Xunit;
 
 namespace WaveNET.Tests.Core.Models.Operations.Wave
@@ -16,8 +19,10 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
         public void Apply()
         {
             var op = new BlipContentOperation(Context, docOp);
-            var blip = WaveletData.CreateDocument("root", Jane, NoParticipants, EmptyDocument.Empty,
-                new DateTime(), 0L);
+            var holderFactory = WaveNET.Core.Model.Wave.Data.WaveletData.WaveletDataFactory.Create(A.Fake<IDocumentFactory>());
+            var wavelet = WaveletDataFactory<IWaveletData>.Of(holderFactory).Create();
+
+            var blip = wavelet.CreateDocument("root", Jane, NoParticipants, EmptyDocument.Empty, new DateTime(), 0L);
 
             op.Apply(blip);
 
