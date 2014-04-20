@@ -20,5 +20,11 @@ namespace WaveNET.Core.Model.Document.Operation
             _accu.Add(new Characters(characters));
             return this;
         }
+
+        public DocOpBuilder Retain(int itemCount)
+        {
+            _accu.Add(new Retain(itemCount));
+            return this;
+        }
     }
 }

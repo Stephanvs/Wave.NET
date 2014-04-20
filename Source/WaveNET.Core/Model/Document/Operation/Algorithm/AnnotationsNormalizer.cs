@@ -1,15 +1,53 @@
-﻿namespace WaveNET.Core.Model.Document.Operation.Algorithm
+﻿using System;
+using System.Collections.Generic;
+
+namespace WaveNET.Core.Model.Document.Operation.Algorithm
 {
+    internal sealed class AnnotationChange
+    {
+        public string Key { get; set; }
+        public string OldValue { get; set; }
+        public string NewValue { get; set; }
+
+        public AnnotationChange(string key, string oldValue, string newValue)
+        {
+            Key = key;
+            OldValue = oldValue;
+            NewValue = newValue;
+        }
+    }
+
+    internal sealed class AnnotationChangeValues
+    {
+        public string OldValue { get; set; }
+        public string NewValue { get; set; }
+
+        public AnnotationChangeValues(string oldValue, string newValue)
+        {
+            OldValue = oldValue;
+            NewValue = newValue;
+        }
+    }
+
     public class AnnotationsNormalizer<T> : IEvaluatingDocOpCursor<T>
     {
-        public AnnotationsNormalizer(RangeNormalizer<T> rangeNormalizer)
+        private readonly IEvaluatingDocOpCursor<T> _target;
+
+        private readonly IDictionary<string, AnnotationChangeValues> _annotationTracker =
+            new Dictionary<string, AnnotationChangeValues>();
+
+        private readonly IDictionary<string, AnnotationChangeValues> _annotationChanges =
+            new Dictionary<string, AnnotationChangeValues>();
+
+        public AnnotationsNormalizer(IEvaluatingDocOpCursor<T> target)
         {
-            throw new System.NotImplementedException();
+            _target = target;
         }
 
         public T Finish()
         {
-            throw new System.NotImplementedException();
+            FlushAnnotations();
+            return _target.Finish();
         }
 
         public void AnnotationBoundary(IAnnotationBoundaryMap map)
@@ -34,7 +72,11 @@
 
         public void Retain(int itemCount)
         {
-            throw new System.NotImplementedException();
+            if (itemCount > 0)
+            {
+                FlushAnnotations();
+                _target.Retain(itemCount);
+            }
         }
 
         public void DeleteCharacters(string characters)
@@ -60,6 +102,18 @@
         public void UpdateAttributes(IAttributesUpdate attributesUpdate)
         {
             throw new System.NotImplementedException();
+        }
+
+        private void FlushAnnotations()
+        {
+            var changes = new List<AnnotationChange>();
+            var ends = new List<string>();
+
+            foreach (var change in _annotationChanges)
+            {
+                // todo: Implement
+                throw new NotImplementedException();
+            }
         }
     }
 }
