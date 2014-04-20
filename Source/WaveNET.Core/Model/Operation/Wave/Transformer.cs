@@ -136,13 +136,10 @@ namespace WaveNET.Core.Model.Operation.Wave
                 Tuple<IDocOp, IDocOp> c = Decomposer.Decompose(clientOperation);
                 Tuple<IDocOp, IDocOp> s = Decomposer.Decompose(serverOperation);
 
-                OperationPair<IDocOp> r1 = new InsertionTransformer().TransformOperations(c.Item1, s.Item1);
-                OperationPair<IDocOp> r2 = new InsertionNoninsertionTransformer().TransformOperations(
-                    r1.ClientOperation, s.Item2);
-                OperationPair<IDocOp> r3 = new InsertionNoninsertionTransformer().TransformOperations(
-                    r1.ServerOperation, c.Item2);
-                OperationPair<IDocOp> r4 = new NoninsertionTransformer().TransformOperations(r3.ServerOperation,
-                    r2.ServerOperation);
+                var r1 = new InsertionTransformer().TransformOperations(c.Item1, s.Item1);
+                var r2 = new InsertionNoninsertionTransformer().TransformOperations(r1.ClientOperation, s.Item2);
+                var r3 = new InsertionNoninsertionTransformer().TransformOperations(r1.ServerOperation, c.Item2);
+                var r4 = new NoninsertionTransformer().TransformOperations(r3.ServerOperation, r2.ServerOperation);
 
                 return new OperationPair<IDocOp>(
                     Composer.Compose(r2.ClientOperation, r4.ClientOperation),

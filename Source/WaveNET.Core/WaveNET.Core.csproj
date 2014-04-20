@@ -94,8 +94,10 @@
     <Compile Include="Model\Document\Operation\Algorithm\DocOpInverter.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\InsertionNoninsertionTransformer.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\InsertionTransformer.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\IRelativePosition.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\NoninsertionTransformer.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\OperationNormalizer.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\PositionTracker.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\RangeNormalizer.cs" />
     <Compile Include="Model\Document\Operation\Automation\IAutomationDocument.cs" />
     <Compile Include="Model\Document\Operation\Automation\ViolationCollector.cs" />
