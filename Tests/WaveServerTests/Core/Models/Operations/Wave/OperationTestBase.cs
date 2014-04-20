@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FakeItEasy;
 using WaveNET.Core.Model.Operation.Wave;
+using WaveNET.Core.Model.Version;
 using WaveNET.Core.Model.Wave;
 using WaveNET.Core.Model.Wave.Data;
 
@@ -21,7 +22,7 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
         protected static readonly DateTime LastModifiedTimestamp = CreationTimestamp.AddSeconds(10);
         protected static readonly DateTime ContextTimestamp = LastModifiedTimestamp.AddSeconds(5);
         protected const long ContextVersion = 4L;
-        //protected static HashedVersion ContextHashedVersion = HashedVersion.Of(ContextVersion, new byte[] { 4, 4, 4, 4 });
+        protected static HashedVersion ContextHashedVersion = HashedVersion.Of(ContextVersion, new byte[] { 4, 4, 4, 4 });
 
         public OperationTestBase()
         {
