@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using WaveNET.Core.Model.Document.Operation;
 using WaveNET.Core.Model.Version;
 
@@ -11,7 +10,7 @@ namespace WaveNET.Core.Model.Wave.Data
     {
         new TData GetDocument(string documentName);
 
-        new TData CreateDocument(string docId, ParticipantId author, ICollection<ParticipantId> contributors,
+        new TData CreateDocument(string docId, ParticipantId author, IList<ParticipantId> contributors,
             IDocInitialization content, DateTime lastModifiedTime, long lastModifiedVersion);
     }
 
@@ -50,7 +49,7 @@ namespace WaveNET.Core.Model.Wave.Data
         /// <param name="lastModifiedTime">time of last worthy modification</param>
         /// <param name="lastModifiedVersion">version of last worthy modification</param>
         /// <returns></returns>
-        IBlipData CreateDocument(string docId, ParticipantId author, ICollection<ParticipantId> contributors,
+        IBlipData CreateDocument(string docId, ParticipantId author, IList<ParticipantId> contributors,
             IDocInitialization content, DateTime lastModifiedTime, long lastModifiedVersion);
 
         /// <summary>

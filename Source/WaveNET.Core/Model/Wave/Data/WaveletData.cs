@@ -64,7 +64,7 @@ namespace WaveNET.Core.Model.Wave.Data
             return _participants;
         }
 
-        protected override IBlipData InternalCreateDocument(string docId, ParticipantId author, ICollection<ParticipantId> contributors,
+        protected override IBlipData InternalCreateDocument(string docId, ParticipantId author, IList<ParticipantId> contributors,
             IDocumentOperationSink contentSink, DateTime lastModifiedTime, long lastModifiedVersion)
         {
             Preconditions.CheckArgument(!_documents.ContainsKey(docId), "Duplicate doc id: %s", docId);

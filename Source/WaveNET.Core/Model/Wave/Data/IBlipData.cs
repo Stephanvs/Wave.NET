@@ -44,6 +44,7 @@ namespace WaveNET.Core.Model.Wave.Data
         /// <summary>
         ///     Notifies the BlipData that the content of the document inside the blip have changed.
         /// </summary>
+        [Obsolete]
         void OnRemoteContentModified();
     }
 }

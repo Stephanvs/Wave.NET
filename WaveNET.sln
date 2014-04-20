@@ -51,6 +51,6 @@ Global
 		{96DE5612-A373-4EA6-A2C2-08E0FA164C02} = {78F25EED-BE21-4DA4-90D8-FE089AAB07C4}
 	EndGlobalSection
 	GlobalSection(NDepend) = preSolution
-		Project = ".\NDepend\WaveNET.ndproj"
+		Project = ""
 	EndGlobalSection
 EndGlobal

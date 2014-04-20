@@ -15,7 +15,8 @@ namespace WaveNET.Core.Model.Wave.Data
         private readonly IDocumentFactory _contentFactory;
 
         protected AbstractWaveletData(WaveletId waveletId, ParticipantId creator, DateTime creationTime, long version,
-            HashedVersion hashedVersion, DateTime lastModifiedTime, WaveId waveId, IDocumentFactory contentFactory)
+                                      HashedVersion hashedVersion, DateTime lastModifiedTime, WaveId waveId,
+                                      IDocumentFactory contentFactory)
         {
             WaveletId = waveletId;
             Creator = creator;
@@ -39,8 +40,8 @@ namespace WaveNET.Core.Model.Wave.Data
         public abstract TData GetDocument(string documentName);
 
         IBlipData IWaveletData.CreateDocument(string docId, ParticipantId author,
-            ICollection<ParticipantId> contributors, IDocInitialization content,
-            DateTime lastModifiedTime, long lastModifiedVersion)
+                                              IList<ParticipantId> contributors, IDocInitialization content,
+                                              DateTime lastModifiedTime, long lastModifiedVersion)
         {
             return CreateDocument(docId, author, contributors, content, lastModifiedTime, lastModifiedVersion);
         }
@@ -66,12 +67,12 @@ namespace WaveNET.Core.Model.Wave.Data
 
         public DateTime CreationTime { get; protected set; }
 
-        public TData CreateDocument(string docId, ParticipantId author, ICollection<ParticipantId> contributors,
-            IDocInitialization content,
-            DateTime lastModifiedTime, long lastModifiedVersion)
+        public TData CreateDocument(string docId, ParticipantId author, IList<ParticipantId> contributors,
+                                    IDocInitialization content,
+                                    DateTime lastModifiedTime, long lastModifiedVersion)
         {
             var sink = _contentFactory.Create<IDocumentOperationSink>(WaveletId, docId, content);
-            var doc = InternalCreateDocument(docId, author, contributors, sink, lastModifiedTime, lastModifiedVersion);
+            TData doc = InternalCreateDocument(docId, author, contributors, sink, lastModifiedTime, lastModifiedVersion);
 
             // todo: notify listeners or use ObservableCollection?
 
@@ -129,7 +130,8 @@ namespace WaveNET.Core.Model.Wave.Data
         protected abstract IList<ParticipantId> GetMutableParticipants();
 
         protected abstract TData InternalCreateDocument(string docId, ParticipantId author,
-            ICollection<ParticipantId> contributors, IDocumentOperationSink contentSink, DateTime lastModifiedTime,
-            long lastModifiedVersion);
+                                                        IList<ParticipantId> contributors,
+                                                        IDocumentOperationSink contentSink, DateTime lastModifiedTime,
+                                                        long lastModifiedVersion);
     }
 }

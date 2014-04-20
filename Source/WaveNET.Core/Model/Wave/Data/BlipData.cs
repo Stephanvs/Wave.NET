@@ -6,54 +6,30 @@ namespace WaveNET.Core.Model.Wave.Data
 {
     public class BlipData : AbstractBlipData
     {
-        public BlipData(string docId, WaveletData waveletData, ParticipantId author, ICollection<ParticipantId> contributors, IDocumentOperationSink contentSink, DateTime lastModifiedTime, long lastModifiedVersion)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly IList<ParticipantId> _contributors;
 
-        public override void Submit()
+        public BlipData(string docId, WaveletData waveletData, ParticipantId author, IList<ParticipantId> contributors, IDocumentOperationSink contentSink, DateTime lastModifiedTime, long lastModifiedVersion)
+            : base(docId, waveletData, author, contentSink, lastModifiedTime, lastModifiedVersion)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public override void AddContributor(ParticipantId participant)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void RemoveContributor(ParticipantId participant)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnRemoteContentModified()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override IWaveletData Wavelet
-        {
-            get { throw new System.NotImplementedException(); }
-        }
-
-        public override ParticipantId Author
-        {
-            get { throw new System.NotImplementedException(); }
+            _contributors = contributors;
         }
 
         public override ReadOnlyCollection<ParticipantId> Contributors
         {
-            get { throw new System.NotImplementedException(); }
+            get { return new ReadOnlyCollection<ParticipantId>(_contributors); }
         }
 
-        public override IDocumentOperationSink Content
+        public override void AddContributor(ParticipantId participant)
         {
-            get { throw new System.NotImplementedException(); }
+            _contributors.Add(participant);
         }
 
-        public override string Id
+        public override void RemoveContributor(ParticipantId participant)
         {
-            get { throw new System.NotImplementedException(); }
+            if (_contributors.Contains(participant))
+            {
+                _contributors.Remove(participant);
+            }
         }
     }
 }
