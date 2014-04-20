@@ -5,10 +5,7 @@ namespace WaveNET.Core.Model.Wave.Data
 {
     public abstract class AbstractBlipData : IBlipData
     {
-        private readonly string _id;
         private readonly AbstractWaveletData<IBlipData> _wavelet;
-        private DateTime _lastModifiedTime;
-        private long _lastModifiedVersion;
 
         protected AbstractBlipData(string id, AbstractWaveletData<IBlipData> wavelet, ParticipantId author,
                                    IDocumentOperationSink content, DateTime lastModifiedTime, long lastModifiedVersion)
@@ -17,8 +14,8 @@ namespace WaveNET.Core.Model.Wave.Data
             Id = id;
             Author = author;
             _wavelet = wavelet;
-            _lastModifiedTime = lastModifiedTime;
-            _lastModifiedVersion = lastModifiedVersion;
+            LastModifiedTime = lastModifiedTime;
+            LastModifiedVersion = lastModifiedVersion;
         }
 
         public IWaveletData Wavelet
@@ -35,16 +32,9 @@ namespace WaveNET.Core.Model.Wave.Data
 
         public abstract ReadOnlyCollection<ParticipantId> Contributors { get; }
 
-        DateTime IReadableBlipData.LastModifiedTime
-        {
-            get { return _lastModifiedTime; }
-        }
+        public DateTime LastModifiedTime { get; set; }
 
-        long IBlipData.LastModifiedVersion
-        {
-            get { return _lastModifiedVersion; }
-            set { _lastModifiedVersion = value; }
-        }
+        public long LastModifiedVersion { get; set; }
 
         public void Submit()
         {
@@ -58,23 +48,6 @@ namespace WaveNET.Core.Model.Wave.Data
         public void OnRemoteContentModified()
         {
             // todo: call _wavelet.getListenerManager().onRemoteBlipDataContentModified(_wavelet, this);
-        }
-
-        DateTime IBlipData.LastModifiedTime
-        {
-            get { return _lastModifiedTime; }
-            set
-            {
-                if (value != _lastModifiedTime)
-                {
-                    _lastModifiedTime = value;
-                }
-            }
-        }
-
-        long IReadableBlipData.LastModifiedVersion
-        {
-            get { return _lastModifiedVersion; }
         }
 
         public IDocumentOperationSink Content { get; private set; }
