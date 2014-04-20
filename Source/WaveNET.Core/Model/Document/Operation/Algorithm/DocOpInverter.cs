@@ -24,7 +24,7 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
 
         public void Characters(string characters)
         {
-            throw new NotImplementedException();
+            _target.DeleteCharacters(characters);
         }
 
         public void ElementStart(string type, IAttributes attributes)

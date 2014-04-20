@@ -37,5 +37,22 @@ namespace WaveNET.Tests.Core.Models.Operations.Wave
             //// editing the document makes the op creator a blip contributor
             //assertEquals(Collections.singleton(fred), blip.getContributors());
         }
+
+        [Fact]
+        public void ReverseRestoresContent()
+        {
+            var op = new BlipContentOperation(Context, docOp);
+            var blip = WaveletData.CreateDocument("root", Fred, NoParticipants, EmptyDocument.Empty, new DateTime(), 0L);
+
+            var reverseOps = op.ApplyAndReturnReverse(blip);
+
+            foreach (var reverse in reverseOps)
+            {
+                reverse.Apply(blip);
+            }
+
+            blip.Contributors.Should().BeEmpty();
+            //blip.Content.Should().Be("");
+        }
     }
 }
