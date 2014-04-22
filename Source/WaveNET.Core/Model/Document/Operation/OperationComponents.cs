@@ -12,6 +12,8 @@ namespace WaveNET.Core.Model.Document.Operation
     {
         public override void Apply(IDocOpCursor cursor)
         {
+            throw new NotImplementedException();
+            // is this supposed to be resursive? Or is this override of Apply not needed?
             Apply(cursor);
         }
     }
@@ -50,7 +52,7 @@ namespace WaveNET.Core.Model.Document.Operation
             _characters = characters;
         }
 
-        public String ChangedCharacters
+        public string ChangedCharacters
         {
             get { return _characters; }
         }
