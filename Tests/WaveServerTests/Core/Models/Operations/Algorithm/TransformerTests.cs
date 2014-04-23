@@ -11,9 +11,11 @@ namespace WaveNET.Tests.Core.Models.Operations.Algorithm
         [Fact]
         public void ClientOpLongerThanServerOp()
         {
-            var ex = Assert.Throws<TransformException>(() => Transformer.Transform(new DocOpBuilder().Retain(1).Build(), new DocOpBuilder().Build()));
+            var ex =
+                Assert.Throws<TransformException>(
+                    () => Transformer.Transform(new DocOpBuilder().Retain(1).Build(), new DocOpBuilder().Build()));
 
             ex.Message.Should().Be("gramsdf");
-        } 
+        }
     }
 }
