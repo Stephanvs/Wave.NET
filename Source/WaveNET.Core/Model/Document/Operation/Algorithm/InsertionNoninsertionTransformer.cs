@@ -17,8 +17,8 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
             // The target responsible for processing components of the insertion-free operation.
             var noninsertionTarget = new NoninsertionTarget(noninsertionPosition);
 
-            insertionTarget.SetOtherTarget(noninsertionTarget);
-            noninsertionTarget.SetOtherTarget(insertionTarget);
+            insertionTarget.OtherTarget = noninsertionTarget;
+            noninsertionTarget.OtherTarget = insertionTarget;
 
             // Incrementally apply the two operations in a linearly-ordered interleaving fashion.
             int insertionIndex = 0;
@@ -52,7 +52,7 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
         {
         }
 
-        abstract class Target : IEvaluatingDocOpCursor<IDocOp>
+        internal abstract class Target : IEvaluatingDocOpCursor<IDocOp>
         {
             private readonly IEvaluatingDocOpCursor<IDocOp> _targetDocument;
             private readonly IRelativePosition _relativePosition;
@@ -77,6 +77,126 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
             public abstract void DeleteElementEnd();
             public abstract void ReplaceAttributes(IAttributes oldAttributes, IAttributes newAttributes);
             public abstract void UpdateAttributes(IAttributesUpdate attributesUpdate);
+        }
+
+        internal class InsertionTarget : Target
+        {
+            public InsertionTarget(IRelativePosition relativePosition)
+                : base(new RangeNormalizer<IDocOp>(new DocOpBuffer()), relativePosition)
+            {
+            }
+
+            public NoninsertionTarget OtherTarget { get; set; }
+
+            public override void AnnotationBoundary(IAnnotationBoundaryMap map)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void Characters(string characters)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void ElementStart(string type, IAttributes attributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void ElementEnd()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void Retain(int itemCount)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void DeleteCharacters(string characters)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void DeleteElementStart(string type, IAttributes attributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void DeleteElementEnd()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void ReplaceAttributes(IAttributes oldAttributes, IAttributes newAttributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void UpdateAttributes(IAttributesUpdate attributesUpdate)
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+
+        internal class NoninsertionTarget : Target
+        {
+            public NoninsertionTarget(IRelativePosition relativePosition) 
+                : base(OperationNormalizer.CreateNormalizer(new DocOpBuffer()), relativePosition)
+            {
+            }
+
+            public InsertionTarget OtherTarget { get; set; }
+
+            public override void AnnotationBoundary(IAnnotationBoundaryMap map)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void Characters(string characters)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void ElementStart(string type, IAttributes attributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void ElementEnd()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void Retain(int itemCount)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void DeleteCharacters(string characters)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void DeleteElementStart(string type, IAttributes attributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void DeleteElementEnd()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void ReplaceAttributes(IAttributes oldAttributes, IAttributes newAttributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public override void UpdateAttributes(IAttributesUpdate attributesUpdate)
+            {
+                throw new System.NotImplementedException();
+            }
         }
     }
 }
