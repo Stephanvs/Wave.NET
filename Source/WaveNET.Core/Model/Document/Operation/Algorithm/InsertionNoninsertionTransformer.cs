@@ -52,7 +52,7 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
         {
         }
 
-        internal abstract class Target : IEvaluatingDocOpCursor<IDocOp>
+        private abstract class Target : IEvaluatingDocOpCursor<IDocOp>
         {
             private readonly IEvaluatingDocOpCursor<IDocOp> _targetDocument;
             private readonly IRelativePosition _relativePosition;
@@ -79,7 +79,7 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
             public abstract void UpdateAttributes(IAttributesUpdate attributesUpdate);
         }
 
-        internal class InsertionTarget : Target
+        private class InsertionTarget : Target
         {
             public InsertionTarget(IRelativePosition relativePosition)
                 : base(new RangeNormalizer<IDocOp>(new DocOpBuffer()), relativePosition)
@@ -139,7 +139,7 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
             }
         }
 
-        internal class NoninsertionTarget : Target
+        private class NoninsertionTarget : Target
         {
             public NoninsertionTarget(IRelativePosition relativePosition) 
                 : base(OperationNormalizer.CreateNormalizer(new DocOpBuffer()), relativePosition)

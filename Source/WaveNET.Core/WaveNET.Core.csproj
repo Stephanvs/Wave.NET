@@ -94,6 +94,7 @@
     <Compile Include="Model\Document\Operation\Algorithm\DocOpInverter.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\InsertionNoninsertionTransformer.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\InsertionTransformer.cs" />
+    <Compile Include="Model\Document\Operation\Algorithm\InternalTransformException.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\IRelativePosition.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\NoninsertionTransformer.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\OperationNormalizer.cs" />
