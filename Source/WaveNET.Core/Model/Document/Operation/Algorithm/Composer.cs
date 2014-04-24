@@ -6,7 +6,7 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
 {
     public class Composer
     {
-        private readonly static IEvaluatingDocOpCursor<IDocOp> _normalizer;
+        private static IEvaluatingDocOpCursor<IDocOp> _normalizer;
         private static Target _target;
         private readonly Target _defaultTarget = new DefaultPreTarget();
         private static AnnotationQueue _preAnnotationQueue;
@@ -30,8 +30,8 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
                     if (op2Index >= op2.Size())
                     {
                         throw new OperationException("Document size mismatch: "
-                            + "op1 resulting length=" + DocOpUtil.resultingDocumentLength(op1)
-                            + ", op2 initial length=" + DocOpUtil.initialDocumentLength(op2));
+                            + "op1 resulting length=" + DocOpUtil.ResultingDocumentLength(op1)
+                            + ", op2 initial length=" + DocOpUtil.InitialDocumentLength(op2));
                     }
                     op2.ApplyComponent(op2Index++, _target);
                 }

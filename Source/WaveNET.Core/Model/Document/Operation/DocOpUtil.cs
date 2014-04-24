@@ -189,5 +189,21 @@ namespace WaveNET.Core.Model.Document.Operation
                 _sb.Append("u@ " + ToConciseString(attributesUpdate) + "; ");
             }
         }
+
+        /// <summary>
+        /// Computes the number of items of the document that an op produces when applied.
+        /// </summary>
+        public static int ResultingDocumentLength(IDocOp docOp)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Computes the number of items of the document that an op applies to, prior to its application.
+        /// </summary>
+        public static int InitialDocumentLength(IDocOp docOp)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
