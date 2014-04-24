@@ -9,8 +9,8 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
         private static IEvaluatingDocOpCursor<IDocOp> _normalizer;
         private static Target _target;
         private readonly Target _defaultTarget = new DefaultPreTarget();
-        private static AnnotationQueue _preAnnotationQueue;
-        private static AnnotationQueue _postAnnotationQueue;
+        private static AnnotationQueue _preAnnotationQueue = new PreAnnotationQueue();
+        private static AnnotationQueue _postAnnotationQueue = new PostAnnotationQueue();
 
         private Composer(IEvaluatingDocOpCursor<IDocOp> cursor)
         {
@@ -91,6 +91,24 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
                     Unqueue(annotationBoundaryMap);
                 }
                 _events.Clear();
+            }
+        }
+
+        private class PreAnnotationQueue
+            : AnnotationQueue
+        {
+            public override void Unqueue(IAnnotationBoundaryMap map)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        private class PostAnnotationQueue
+            : AnnotationQueue
+        {
+            public override void Unqueue(IAnnotationBoundaryMap map)
+            {
+                throw new NotImplementedException();
             }
         }
 
