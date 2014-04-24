@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using WaveNET.Core.Model.Document.Operation.Automation;
 using WaveNET.Core.Model.Document.Operation.Validation;
 
@@ -112,12 +111,13 @@ namespace WaveNET.Core.Model.Document.Operation
                 item.Apply(cursor);
         }
 
-        private void Check(int i, DocOpComponentType type)
+        private void Check(int i, DocOpComponentType expectedType)
         {
-            //Contract.Requires(
-            //    _components[i].GetType() == type,
-            //    String.Format("Component {0} is not of type '{1}' it is of type ''", i, type, _components[i].GetType())
-            //    );
+            DocOpComponentType actualType = _components[i].GetType();
+            if (actualType != expectedType)
+            {
+                throw new ArgumentException("Component " + i + " is not of type ' " + expectedType + "', it is '" + actualType + "'");
+            }
         }
 
         #region Overrides

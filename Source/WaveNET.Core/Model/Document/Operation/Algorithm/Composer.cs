@@ -9,8 +9,8 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
         private static IEvaluatingDocOpCursor<IDocOp> _normalizer;
         private static Target _target;
         private readonly Target _defaultTarget = new DefaultPreTarget();
-        private static AnnotationQueue _preAnnotationQueue = new PreAnnotationQueue();
-        private static AnnotationQueue _postAnnotationQueue = new PostAnnotationQueue();
+        private static readonly AnnotationQueue _preAnnotationQueue = new PreAnnotationQueue();
+        private static readonly AnnotationQueue _postAnnotationQueue = new PostAnnotationQueue();
 
         private Composer(IEvaluatingDocOpCursor<IDocOp> cursor)
         {
@@ -22,6 +22,7 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
             _target = _defaultTarget;
             int op1Index = 0;
             int op2Index = 0;
+
             while (op1Index < op1.Size())
             {
                 op1.ApplyComponent(op1Index++, _target);
