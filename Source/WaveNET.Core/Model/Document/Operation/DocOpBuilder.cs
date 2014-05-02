@@ -21,6 +21,12 @@ namespace WaveNET.Core.Model.Document.Operation
             return this;
         }
 
+        public DocOpBuilder AnnotationBoundary(IAnnotationBoundaryMap map)
+        {
+            _accu.Add(new AnnotationBoundary(map));
+            return this;
+        }
+
         public DocOpBuilder Retain(int itemCount)
         {
             _accu.Add(new Retain(itemCount));

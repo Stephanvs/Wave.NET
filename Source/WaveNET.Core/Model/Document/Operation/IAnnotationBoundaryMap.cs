@@ -7,11 +7,15 @@
     public interface IAnnotationBoundaryMap
     {
         int EndSize();
+
         string GetEndKey(int index);
 
         int ChangeSize();
+
         string GetChangeKey(int index);
+
         string GetOldValue(int index);
+
         string GetNewValue(int index);
     }
 }
