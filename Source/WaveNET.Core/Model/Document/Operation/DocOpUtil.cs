@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Text;
+using WaveNET.Core.Model.Document.Operation.Algorithm;
 
 namespace WaveNET.Core.Model.Document.Operation
 {
@@ -118,13 +119,14 @@ namespace WaveNET.Core.Model.Document.Operation
                 : "\"" + EscapeLiteral(str) + "\"";
         }
 
-        public static IDocInitialization AsInitialization(IBufferedDocOp bufferedDocOp)
+        public static IDocInitialization AsInitialization(IDocOp docOp)
         {
-            if (bufferedDocOp is IDocInitialization)
+            var docInitialization = docOp as IDocInitialization;
+            if (docInitialization != null)
             {
-                return (IDocInitialization) bufferedDocOp;
+                return docInitialization;
             }
-            return new BufferedDocInitialization(bufferedDocOp);
+            return new BufferedDocInitialization(docOp);
         }
 
         private class SimpleDocOpCursor
@@ -204,6 +206,22 @@ namespace WaveNET.Core.Model.Document.Operation
         public static int InitialDocumentLength(IDocOp docOp)
         {
             throw new System.NotImplementedException();
+        }
+
+        public static IDocInitialization Normalize(IDocInitialization input)
+        {
+            var normalizer = new AnnotationsNormalizer<IDocOp>(new RangeNormalizer<IDocOp>(new DocOpBuffer()));
+            input.Apply(normalizer);
+
+            return AsInitialization(normalizer.Finish());
+        }
+
+        public static IDocOp Normalize(IDocOp input)
+        {
+            var normalizer = new AnnotationsNormalizer<IDocOp>(new RangeNormalizer<IDocOp>(new DocOpBuffer()));
+            input.Apply(normalizer);
+
+            return normalizer.Finish();
         }
     }
 }

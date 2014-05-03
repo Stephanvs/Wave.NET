@@ -18,8 +18,8 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
             // The target responsible for processing components of the server operation.
             var serverTarget = new Target(serverPosition);
 
-            clientTarget.SetOtherTarget(serverTarget);
-            serverTarget.SetOtherTarget(clientTarget);
+            clientTarget.OtherTarget = serverTarget;
+            serverTarget.OtherTarget = clientTarget;
 
             // Incrementally apply the two operations in a linearly-ordered interleaving fashion.
             ApplyInsertionTransformation(clientOperation, serverOperation, clientTarget, clientPosition, serverTarget);
@@ -68,7 +68,7 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
             private readonly IEvaluatingDocOpCursor<IDocOp> _targetDocument =
                 new RangeNormalizer<IDocOp>(new DocOpBuffer());
 
-            private Target _otherTarget;
+            public Target OtherTarget { get; set; }
 
             public Target(IRelativePosition relativePosition)
             {
@@ -88,19 +88,19 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
             public void Characters(string characters)
             {
                 _targetDocument.Characters(characters);
-                _otherTarget._targetDocument.Retain(characters.Length);
+                OtherTarget._targetDocument.Retain(characters.Length);
             }
 
             public void ElementStart(string type, IAttributes attributes)
             {
                 _targetDocument.ElementStart(type, attributes);
-                _otherTarget._targetDocument.Retain(1);
+                OtherTarget._targetDocument.Retain(1);
             }
 
             public void ElementEnd()
             {
                 _targetDocument.ElementEnd();
-                _otherTarget._targetDocument.Retain(1);
+                OtherTarget._targetDocument.Retain(1);
             }
 
             public void Retain(int itemCount)
@@ -111,12 +111,12 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
                 if (_relativePosition.Get() < 0)
                 {
                     _targetDocument.Retain(itemCount);
-                    _otherTarget._targetDocument.Retain(itemCount);
+                    OtherTarget._targetDocument.Retain(itemCount);
                 }
                 else if (oldPosition < 0)
                 {
                     _targetDocument.Retain(-oldPosition);
-                    _otherTarget._targetDocument.Retain(-oldPosition);
+                    OtherTarget._targetDocument.Retain(-oldPosition);
                 }
             }
 
@@ -143,11 +143,6 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
             public void UpdateAttributes(IAttributesUpdate attributesUpdate)
             {
                 throw new InvalidOperationException("This method should never be called.");
-            }
-
-            public void SetOtherTarget(Target other)
-            {
-                _otherTarget = other;
             }
         }
     }

@@ -5,9 +5,9 @@ namespace WaveNET.Core.Model.Document.Operation
     public class BufferedDocInitialization
         : AbstractBufferedDocInitialization
     {
-        private readonly IBufferedDocOp op;
+        private readonly IDocOp op;
 
-        public BufferedDocInitialization(IBufferedDocOp op)
+        public BufferedDocInitialization(IDocOp op)
         {
             this.op = op;
         }
