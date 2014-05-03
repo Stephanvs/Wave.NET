@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WaveNET.Core.Model.Document.Operation.Algorithm
 {
@@ -113,12 +114,72 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
             var changes = new List<AnnotationChange>();
             var ends = new List<string>();
 
-            throw new NotImplementedException();
-
             foreach (var change in _annotationChanges)
             {
-                // todo: Implement
-                throw new NotImplementedException();
+                var key = change.Key;
+                var values = change.Value;
+                var previousValues = _annotationTracker[key];
+
+                if (values == null)
+                {
+                    if (previousValues != null)
+                    {
+                        _annotationTracker.Remove(key);
+                        ends.Add(key);
+                    }
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                    //if (previousValues == null || 
+                    //    !ValueUtils.Equals(values.OldValue, previousValues.OldValue) ||
+                    //    !ValueUtils.Equals(values.NewValue, previousValues.NewValue))
+                    //{
+                    //    _annotationTracker.Add(key, values);
+                    //    changes.Add(new AnnotationChange(key, values.OldValue, values.NewValue));
+                    //}
+                }
+
+                if (changes.Any() || ends.Any())
+                {
+                    throw new NotImplementedException();
+                    //_target.AnnotationBoundary(new AnnotationBoundaryMap()
+                    //{
+                    //    @Override
+                    //    public int changeSize() {
+                    //      return changes.size();
+                    //    }
+
+                    //    @Override
+                    //    public String getChangeKey(int changeIndex) {
+                    //      return changes.get(changeIndex).key;
+                    //    }
+
+                    //    @Override
+                    //    public String getOldValue(int changeIndex) {
+                    //      return changes.get(changeIndex).oldValue;
+                    //    }
+
+                    //    @Override
+                    //    public String getNewValue(int changeIndex) {
+                    //      return changes.get(changeIndex).newValue;
+                    //    }
+
+                    //    @Override
+                    //    public int endSize() {
+                    //      return ends.size();
+                    //    }
+
+                    //    @Override
+                    //    public String getEndKey(int endIndex) {
+                    //      return ends.get(endIndex);
+                    //    }
+
+                    //  });
+                    //}
+                }
+
+                _annotationChanges.Clear();
             }
         }
     }
