@@ -14,13 +14,8 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
         private class Target
             : IEvaluatingDocOpCursor<Tuple<IDocOp, IDocOp>>
         {
-#warning Use Dependency Injection Container for resolving OperationNormalizer
-            private readonly IEvaluatingDocOpCursor<IDocOp> _insertionOp =
-                OperationNormalizer.CreateNormalizer(new DocOpBuffer());
-
-#warning Use Dependency Injection Container for resolving OperationNormalizer
-            private readonly IEvaluatingDocOpCursor<IDocOp> _noninsertionOp =
-                OperationNormalizer.CreateNormalizer(new DocOpBuffer());
+            private readonly IEvaluatingDocOpCursor<IDocOp> _insertionOp = OperationNormalizer.CreateNormalizer(new DocOpBuffer());
+            private readonly IEvaluatingDocOpCursor<IDocOp> _noninsertionOp = OperationNormalizer.CreateNormalizer(new DocOpBuffer());
 
             public Tuple<IDocOp, IDocOp> Finish()
             {

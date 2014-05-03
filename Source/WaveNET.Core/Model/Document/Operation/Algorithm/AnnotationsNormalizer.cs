@@ -113,6 +113,8 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
             var changes = new List<AnnotationChange>();
             var ends = new List<string>();
 
+            throw new NotImplementedException();
+
             foreach (var change in _annotationChanges)
             {
                 // todo: Implement
