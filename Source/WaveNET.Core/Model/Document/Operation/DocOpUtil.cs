@@ -192,12 +192,138 @@ namespace WaveNET.Core.Model.Document.Operation
             }
         }
 
+        private class ResultingDocumentLengthDocOpCursor
+            : IDocOpCursor
+        {
+            private readonly int[] _size;
+
+            public ResultingDocumentLengthDocOpCursor(int[] size)
+            {
+                _size = size;
+            }
+
+            public void AnnotationBoundary(IAnnotationBoundaryMap map)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void Characters(string characters)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void ElementStart(string type, IAttributes attributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void ElementEnd()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void Retain(int itemCount)
+            {
+                _size[0] += itemCount;
+            }
+
+            public void DeleteCharacters(string characters)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void DeleteElementStart(string type, IAttributes attributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void DeleteElementEnd()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void ReplaceAttributes(IAttributes oldAttributes, IAttributes newAttributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void UpdateAttributes(IAttributesUpdate attributesUpdate)
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+
         /// <summary>
         /// Computes the number of items of the document that an op produces when applied.
         /// </summary>
         public static int ResultingDocumentLength(IDocOp docOp)
         {
-            throw new System.NotImplementedException();
+            int[] size = { 0 };
+
+            docOp.Apply(new ResultingDocumentLengthDocOpCursor(size));
+
+            return size[0];
+        }
+
+        private class InitialDocumentLengthDocOpCursor
+            : IDocOpCursor
+        {
+            private readonly int[] _size;
+
+            public InitialDocumentLengthDocOpCursor(int[] size)
+            {
+                _size = size;
+            }
+
+            public void AnnotationBoundary(IAnnotationBoundaryMap map)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void Characters(string characters)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void ElementStart(string type, IAttributes attributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void ElementEnd()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void Retain(int itemCount)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void DeleteCharacters(string characters)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void DeleteElementStart(string type, IAttributes attributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void DeleteElementEnd()
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void ReplaceAttributes(IAttributes oldAttributes, IAttributes newAttributes)
+            {
+                throw new System.NotImplementedException();
+            }
+
+            public void UpdateAttributes(IAttributesUpdate attributesUpdate)
+            {
+                throw new System.NotImplementedException();
+            }
         }
 
         /// <summary>
@@ -205,7 +331,11 @@ namespace WaveNET.Core.Model.Document.Operation
         /// </summary>
         public static int InitialDocumentLength(IDocOp docOp)
         {
-            throw new System.NotImplementedException();
+            int[] size = { 0 };
+
+            docOp.Apply(new InitialDocumentLengthDocOpCursor(size));
+
+            return size[0];
         }
 
         public static IDocInitialization Normalize(IDocInitialization input)

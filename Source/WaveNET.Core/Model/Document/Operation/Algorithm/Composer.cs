@@ -298,9 +298,11 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
         private class RetainPostTarget
             : PostTarget
         {
+            private readonly int _itemCount;
+
             public RetainPostTarget(int itemCount)
             {
-                throw new NotImplementedException();
+                _itemCount = itemCount;
             }
 
             public override void Retain(int itemCount)
