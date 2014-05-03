@@ -27,6 +27,18 @@ namespace WaveNET.Core.Model.Document.Operation
             return this;
         }
 
+        public DocOpBuilder ElementEnd()
+        {
+            _accu.Add(new ElementEnd()); // Todo: create static instance?
+            return this;
+        }
+
+        public DocOpBuilder ElementStart(string type, IAttributes attributes)
+        {
+            _accu.Add(new ElementStart(type, attributes));
+            return this;
+        }
+
         public DocOpBuilder Retain(int itemCount)
         {
             _accu.Add(new Retain(itemCount));

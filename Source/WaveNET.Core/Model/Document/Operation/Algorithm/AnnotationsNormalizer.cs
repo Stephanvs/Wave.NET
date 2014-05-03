@@ -57,7 +57,11 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
 
         public void Characters(string characters)
         {
-            throw new System.NotImplementedException();
+            if (!string.IsNullOrEmpty(characters))
+            {
+                FlushAnnotations();
+                _target.Characters(characters);
+            }
         }
 
         public void ElementStart(string type, IAttributes attributes)
