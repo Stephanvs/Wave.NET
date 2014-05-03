@@ -1,0 +1,8 @@
+﻿<Window x:Class="WaveNET.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Wave.NET" Height="350" Width="525">
+    <Grid>
+        <TextBox Text="Hello World" x:Name="TextInput" />
+    </Grid>
+</Window>
