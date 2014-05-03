@@ -106,6 +106,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Source\WaveNET.Core\WaveNET.Core.csproj">
+      <Project>{5853a40b-6757-49f2-8c0b-67ee10073b77}</Project>
+      <Name>WaveNET.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
