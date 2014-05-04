@@ -2,6 +2,7 @@
 
 namespace WaveNET.Core.Model.Document.Operation
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable")]
     public class Attributes
         : Dictionary<string, string>
         , IAttributes

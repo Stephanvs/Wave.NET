@@ -14,15 +14,18 @@ namespace WaveNET.Core.Model.Document.Operation
     /// </summary>
     public class BufferedDocOp : IBufferedDocOp
     {
-        #region BufferedDocOp Implementation
-
         private readonly IList<DocOpComponent> _components;
-        private bool _knownToBeWellFormed = false;
 
         private BufferedDocOp(IList<DocOpComponent> components)
         {
+            IsKnownToBeWellformed = false;
             _components = components;
         }
+
+        /// <summary>
+        ///     true if the op is known to be well-formed. false implies nothing in particular.
+        /// </summary>
+        public bool IsKnownToBeWellformed { get; set; }
 
         public int Size()
         {
@@ -116,29 +119,23 @@ namespace WaveNET.Core.Model.Document.Operation
             DocOpComponentType actualType = _components[i].GetType();
             if (actualType != expectedType)
             {
-                throw new ArgumentException("Component " + i + " is not of type ' " + expectedType + "', it is '" + actualType + "'");
+                throw new ArgumentException("Component " + i + " is not of type ' " + expectedType + "', it is '" +
+                                            actualType + "'");
             }
         }
-
-        #region Overrides
 
         public override string ToString()
         {
             return DocOpUtil.ToConciseString(this);
         }
 
-        #endregion
-
-        #endregion
-
-        #region Factory Methods
-
         public static BufferedDocOp Create(IList<DocOpComponent> components)
         {
             BufferedDocOp op = CreateUnchecked(components);
             CheckWellformedness(op);
 
-            //Contract.Ensures(op._knownToBeWellFormed);
+            System.Diagnostics.Debug.Assert(op.IsKnownToBeWellformed);
+
             return op;
         }
 
@@ -147,20 +144,20 @@ namespace WaveNET.Core.Model.Document.Operation
             return new BufferedDocOp(components);
         }
 
-        private static void CheckWellformedness(BufferedDocOp value)
+        private static void CheckWellformedness(IBufferedDocOp value)
         {
-            if (!DocOpValidator.IsWellformed(null, (IBufferedDocOp) value))
+            if (!DocOpValidator.IsWellformed(null, value))
             {
                 // Check again, collecting violations this time.
                 var violationCollector = new ViolationCollector();
-                DocOpValidator.IsWellformed(violationCollector, (IBufferedDocOp) value);
+                DocOpValidator.IsWellformed(violationCollector, value);
+
+                throw new NotImplementedException();
 
                 // Execution should not reach this point, because the DocOpValidator should return to caller
                 //Contract.Ensures(true,
                 //    String.Format("Attempt to build ill-formed operation ({0}): {1}", violationCollector, value));
             }
         }
-
-        #endregion
     }
 }

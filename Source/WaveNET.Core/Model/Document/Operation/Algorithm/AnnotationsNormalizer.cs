@@ -67,12 +67,14 @@ namespace WaveNET.Core.Model.Document.Operation.Algorithm
 
         public void ElementStart(string type, IAttributes attributes)
         {
-            throw new System.NotImplementedException();
+            FlushAnnotations();
+            _target.ElementStart(type, attributes);
         }
 
         public void ElementEnd()
         {
-            throw new System.NotImplementedException();
+            FlushAnnotations();
+            _target.ElementEnd();
         }
 
         public void Retain(int itemCount)

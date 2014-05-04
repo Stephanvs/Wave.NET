@@ -42,5 +42,18 @@ namespace WaveNET.Tests.Core.Models.Operations.Algorithm
 
             ex.Message.Should().Be("");
         }
+
+        [Fact]
+        public void ComposeShouldntThrow()
+        {
+            IDocOp @checked = new DocOpBuilder().Build();
+            IDocOp @unchecked = new DocOpBuilder()
+                .ElementStart(".!$*.4!(,", Attributes.Empty)
+                .ElementEnd()
+                .BuildUnchecked();
+
+            // compose unchecked this time, nothing should be thrown.
+            Composer.ComposeUnchecked(@checked, @unchecked);
+        }
     }
 }

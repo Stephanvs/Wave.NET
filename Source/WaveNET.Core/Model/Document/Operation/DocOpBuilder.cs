@@ -15,6 +15,11 @@ namespace WaveNET.Core.Model.Document.Operation
             return BufferedDocOp.Create(_accu);
         }
 
+        public IDocOp BuildUnchecked()
+        {
+            return BufferedDocOp.CreateUnchecked(_accu);
+        }
+
         public DocOpBuilder Characters(string characters)
         {
             _accu.Add(new Characters(characters));
