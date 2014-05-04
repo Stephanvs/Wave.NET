@@ -120,6 +120,7 @@ namespace WaveNET.Core.Model.Operation.Wave
         /// <param name="clientOperation">the operation from the client</param>
         /// <param name="serverOperation">the operation from the server</param>
         /// <returns>the transformed pair of operations</returns>
+        /// <exception cref="TransformException">if a problem was encountered during the transformation process</exception>
         public static OperationPair<IDocOp> Transform(IDocOp clientOperation, IDocOp serverOperation)
         {
             // The transform process consists of decomposing the client and server
