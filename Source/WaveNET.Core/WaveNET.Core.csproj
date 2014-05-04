@@ -100,6 +100,7 @@
     <Compile Include="Model\Document\Operation\Algorithm\OperationNormalizer.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\PositionTracker.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\RangeNormalizer.cs" />
+    <Compile Include="Model\Document\Operation\Attributes.cs" />
     <Compile Include="Model\Document\Operation\Automation\IAutomationDocument.cs" />
     <Compile Include="Model\Document\Operation\Automation\ViolationCollector.cs" />
     <Compile Include="Model\Document\Operation\BufferedDocInitialization.cs" />

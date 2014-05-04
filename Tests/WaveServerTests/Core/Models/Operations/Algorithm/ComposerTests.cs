@@ -33,7 +33,10 @@ namespace WaveNET.Tests.Core.Models.Operations.Algorithm
         public void ComposerChecking()
         {
             IDocOp @checked = new DocOpBuilder().Build();
-            IDocOp @unchecked = new DocOpBuilder().ElementStart(".!$*.4!(,", Attributes.Empty).ElementEnd().BuildUnchecked();
+            IDocOp @unchecked = new DocOpBuilder()
+                .ElementStart(".!$*.4!(,", Attributes.Empty)
+                .ElementEnd()
+                .BuildUnchecked();
 
             var ex = Assert.Throws<InvalidOperationException>(() => Composer.Compose(@checked, @unchecked));
 
