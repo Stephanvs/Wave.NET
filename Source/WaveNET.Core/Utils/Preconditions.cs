@@ -31,5 +31,19 @@ namespace WaveNET.Core.Utils
                 throw new ArgumentException(string.Format(messageFormat, errorMessages));
             }
         }
+
+        /// <summary>
+        ///     Note an illegal state.
+        /// </summary>
+        /// <remarks>
+        ///     Useful when an explicit check was done separately, to avoid building up
+        ///     the error message object or string unecessarily (if profiling reveals a
+        ///     hotspot).
+        /// </remarks>
+        /// <param name="errorMessage"></param>
+        public static void InvalidOperation(string errorMessage)
+        {
+            throw new InvalidOperationException(errorMessage);
+        }
     }
 }

@@ -101,9 +101,15 @@
     <Compile Include="Model\Document\Operation\Algorithm\PositionTracker.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\RangeNormalizer.cs" />
     <Compile Include="Model\Document\Operation\Attributes.cs" />
+    <Compile Include="Model\Document\Operation\Automation\DocOpAutomation.cs" />
+    <Compile Include="Model\Document\Operation\Automation\DocumentSchema.cs" />
+    <Compile Include="Model\Document\Operation\Automation\EmptyDocumentAutomation.cs" />
     <Compile Include="Model\Document\Operation\Automation\IAutomationDocument.cs" />
     <Compile Include="Model\Document\Operation\Automation\IDocumentSchema.cs" />
+    <Compile Include="Model\Document\Operation\Automation\IllFormedException.cs" />
+    <Compile Include="Model\Document\Operation\Automation\ValidationDocOpCursor.cs" />
     <Compile Include="Model\Document\Operation\Automation\ValidationResult.cs" />
+    <Compile Include="Model\Document\Operation\Automation\Violation.cs" />
     <Compile Include="Model\Document\Operation\Automation\ViolationCollector.cs" />
     <Compile Include="Model\Document\Operation\BufferedDocInitialization.cs" />
     <Compile Include="Model\Document\Operation\BufferedDocOp.cs" />

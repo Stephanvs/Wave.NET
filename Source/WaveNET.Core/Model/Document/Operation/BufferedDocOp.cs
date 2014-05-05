@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using WaveNET.Core.Model.Document.Operation.Automation;
 using WaveNET.Core.Model.Document.Operation.Validation;
+using WaveNET.Core.Utils;
 
 namespace WaveNET.Core.Model.Document.Operation
 {
@@ -150,13 +151,11 @@ namespace WaveNET.Core.Model.Document.Operation
             {
                 // Check again, collecting violations this time.
                 var violationCollector = new ViolationCollector();
+
                 DocOpValidator.IsWellformed(violationCollector, value);
 
-                throw new NotImplementedException();
-
-                // Execution should not reach this point, because the DocOpValidator should return to caller
-                //Contract.Ensures(true,
-                //    String.Format("Attempt to build ill-formed operation ({0}): {1}", violationCollector, value));
+                Preconditions.InvalidOperation(
+                    string.Format("Attempt to build ill-formed operation ({0}): {1}", violationCollector, value));
             }
         }
     }

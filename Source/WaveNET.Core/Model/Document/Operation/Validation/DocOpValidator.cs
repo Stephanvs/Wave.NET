@@ -48,17 +48,32 @@ namespace WaveNET.Core.Model.Document.Operation.Validation
             // be invalid; however, we ignore the validity aspect anyway since we
             // only care about well-formedness.
             var validationResult =
-                Validate(collector, null, null, docOp);
-                //Validate(collector, DocumentSchema.NO_SCHEMA_CONSTRAINTS, DocOpAutomation.EmptyDocument, docOp);
+                Validate(collector, DocumentSchema.NoSchemaConstraints, DocOpAutomation.EmptyDocument, docOp);
 
-            throw new NotImplementedException();
-
-            return validationResult == ValidationResult.IllFormed;
+            return validationResult != ValidationResult.IllFormed;
         }
 
         private static ValidationResult Validate(ViolationCollector collector, IDocumentSchema schema, IAutomationDocument document, IDocOp docOp)
         {
-            return ValidationResult.IllFormed;
+            if (schema == null)
+            {
+                schema = DocumentSchema.NoSchemaConstraints;
+            }
+
+            var automation = new DocOpAutomation(document, schema);
+            var accu = new ValidationResult[] { ValidationResult.Valid };
+            try
+            {
+                docOp.Apply(new ValidationDocOpCursor(collector, automation, accu));
+            }
+            catch (IllFormedException illFormed)
+            {
+                return ValidationResult.IllFormed;
+            }
+
+            throw new NotImplementedException();
+            //accu[0] = accu[0].mergeWith(a.checkFinish(v));
+            return accu[0];
         }
     }
 }
