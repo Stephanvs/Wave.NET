@@ -6,14 +6,25 @@ namespace WaveNET.Core.Model.Document.Operation.Automation
         : IDocOpCursor
     {
         private readonly ViolationCollector _collector;
-        private readonly DocOpAutomation _automation;
+        private readonly DocOpAutomaton _automaton;
         private readonly ValidationResult[] _accu;
 
-        public ValidationDocOpCursor(ViolationCollector collector, DocOpAutomation automation, ValidationResult[] accu)
+        private static readonly IllFormedException IllFormedException = 
+            new IllFormedException("Preallocated exception with a meaningless stack trace");
+
+        public ValidationDocOpCursor(ViolationCollector collector, DocOpAutomaton automaton, ValidationResult[] accu)
         {
             _collector = collector;
-            _automation = automation;
+            _automaton = automaton;
             _accu = accu;
+        }
+
+        private void AbortIfIllFormed()
+        {
+            if (_accu[0] == ValidationResult.IllFormed)
+            {
+                throw IllFormedException;
+            }
         }
 
         public void AnnotationBoundary(IAnnotationBoundaryMap map)
@@ -23,8 +34,7 @@ namespace WaveNET.Core.Model.Document.Operation.Automation
 
         public void Characters(string characters)
         {
-            _accu[0] = _accu[0].MergeWith(_automation.CheckCharacters(characters, _collector));
-            throw new System.NotImplementedException();
+            _accu[0] = _accu[0].MergeWith(_automaton.CheckCharacters(characters, _collector));
         }
 
         public void ElementStart(string type, IAttributes attributes)
@@ -39,7 +49,9 @@ namespace WaveNET.Core.Model.Document.Operation.Automation
 
         public void Retain(int itemCount)
         {
-            throw new System.NotImplementedException();
+            _accu[0] = _accu[0].MergeWith(_automaton.CheckRetain(itemCount, _collector));
+            AbortIfIllFormed();
+            _automaton.DoRetain(itemCount);
         }
 
         public void DeleteCharacters(string characters)

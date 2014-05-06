@@ -19,7 +19,7 @@ namespace WaveNET.Core.Model.Document.Operation.Automation
 
         InvalidSchema = 2,
 
-        Valid = 4
+        Valid = 3
     }
 
     public static class ValidationResultExtensions
@@ -30,8 +30,8 @@ namespace WaveNET.Core.Model.Document.Operation.Automation
 
             var min = Math.Min((int) vr, (int) other);
 
-            var name = Enum.GetNames(typeof (ValidationResult))[min];
-
+            var name = Enum.GetNames(typeof (ValidationResult))[min - 1]; // Minus one to convert to index
+            
             return (ValidationResult) Enum.Parse(typeof (ValidationResult), name, ignoreCase: false);
         }
     }

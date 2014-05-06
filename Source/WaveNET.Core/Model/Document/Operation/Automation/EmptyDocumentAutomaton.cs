@@ -1,6 +1,6 @@
 ﻿namespace WaveNET.Core.Model.Document.Operation.Automation
 {
-    public class EmptyDocumentAutomation : IAutomationDocument
+    public class EmptyDocumentAutomaton : IAutomatonDocument
     {
         public string ElementStartingAt(int position)
         {
@@ -44,7 +44,7 @@
 
         public int Length()
         {
-            throw new System.NotImplementedException();
+            return 0;
         }
 
         public int FirstAnnotationChange(int start, int end, string key, string fromValue)

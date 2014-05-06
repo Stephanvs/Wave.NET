@@ -100,11 +100,12 @@
     <Compile Include="Model\Document\Operation\Algorithm\OperationNormalizer.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\PositionTracker.cs" />
     <Compile Include="Model\Document\Operation\Algorithm\RangeNormalizer.cs" />
+    <Compile Include="Model\Document\Operation\AnnotationsUpdate.cs" />
     <Compile Include="Model\Document\Operation\Attributes.cs" />
-    <Compile Include="Model\Document\Operation\Automation\DocOpAutomation.cs" />
+    <Compile Include="Model\Document\Operation\Automation\DocOpAutomaton.cs" />
     <Compile Include="Model\Document\Operation\Automation\DocumentSchema.cs" />
-    <Compile Include="Model\Document\Operation\Automation\EmptyDocumentAutomation.cs" />
-    <Compile Include="Model\Document\Operation\Automation\IAutomationDocument.cs" />
+    <Compile Include="Model\Document\Operation\Automation\EmptyDocumentAutomaton.cs" />
+    <Compile Include="Model\Document\Operation\Automation\IAutomatonDocument.cs" />
     <Compile Include="Model\Document\Operation\Automation\IDocumentSchema.cs" />
     <Compile Include="Model\Document\Operation\Automation\IllFormedException.cs" />
     <Compile Include="Model\Document\Operation\Automation\ValidationDocOpCursor.cs" />
