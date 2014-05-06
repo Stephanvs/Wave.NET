@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace WaveNET.Core.Model.Document.Operation.Automation
+namespace WaveNET.Core.Model.Document.Operation.Automaton
 {
     public class ViolationCollector
     {

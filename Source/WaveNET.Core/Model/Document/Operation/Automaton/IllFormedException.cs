@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace WaveNET.Core.Model.Document.Operation.Automation
+namespace WaveNET.Core.Model.Document.Operation.Automaton
 {
     [Serializable]
     public class IllFormedException : Exception

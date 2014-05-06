@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace WaveNET.Core.Model.Document.Operation.Automation
+﻿namespace WaveNET.Core.Model.Document.Operation.Automaton
 {
     public class ValidationDocOpCursor
         : IDocOpCursor

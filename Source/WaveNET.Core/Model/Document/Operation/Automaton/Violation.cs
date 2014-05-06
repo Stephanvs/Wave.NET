@@ -1,4 +1,4 @@
-﻿namespace WaveNET.Core.Model.Document.Operation.Automation
+﻿namespace WaveNET.Core.Model.Document.Operation.Automaton
 {
     /// <summary>
     ///     An object containing information about one individual reason why an

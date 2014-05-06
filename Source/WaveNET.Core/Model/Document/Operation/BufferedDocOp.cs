@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using WaveNET.Core.Model.Document.Operation.Automation;
+using WaveNET.Core.Model.Document.Operation.Automaton;
 using WaveNET.Core.Model.Document.Operation.Validation;
 using WaveNET.Core.Utils;
 

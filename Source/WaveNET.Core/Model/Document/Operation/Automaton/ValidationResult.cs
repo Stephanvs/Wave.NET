@@ -1,7 +1,7 @@
 ﻿using System;
 using WaveNET.Core.Utils;
 
-namespace WaveNET.Core.Model.Document.Operation.Automation
+namespace WaveNET.Core.Model.Document.Operation.Automaton
 {
     /// <summary>
     /// The overall result of validating an operation.

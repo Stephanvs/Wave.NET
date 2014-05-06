@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace WaveNET.Core.Model.Document.Operation.Automation
+namespace WaveNET.Core.Model.Document.Operation.Automaton
 {
     // Todo: rename to DocOpAutomaton
     public class DocOpAutomaton

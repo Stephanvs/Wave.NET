@@ -1,5 +1,5 @@
 ﻿using System;
-using WaveNET.Core.Model.Document.Operation.Automation;
+using WaveNET.Core.Model.Document.Operation.Automaton;
 
 namespace WaveNET.Core.Model.Document.Operation.Validation
 {

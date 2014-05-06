@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WaveNET.Core.Model.Document.Operation.Automation
+namespace WaveNET.Core.Model.Document.Operation.Automaton
 {
     /// <summary>
     ///     The query methods that DocOpAutomaton needs.
