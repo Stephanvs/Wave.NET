@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace WaveNET.Core.Model.Document.Operation.Automaton
 {
@@ -9,9 +10,9 @@ namespace WaveNET.Core.Model.Document.Operation.Automaton
     public class DocOpAutomaton
     {
         public static readonly IAutomatonDocument EmptyDocument = new EmptyDocumentAutomaton();
+        private readonly IAnnotationsUpdate _annotationsUpdate = new AnnotationsUpdate();
         private readonly IDocumentSchema _constraints;
         private readonly IAutomatonDocument _document;
-        private readonly IAnnotationsUpdate _annotationsUpdate = new AnnotationsUpdate();
         private readonly IList<InsertStart> _insertionStack = new List<InsertStart>();
         private int _deletionStackDepth = 0;
         private int _effectivePos = 0;
@@ -31,8 +32,12 @@ namespace WaveNET.Core.Model.Document.Operation.Automaton
         {
             if (characters == null) return NullCharacters(collector);
             if (string.IsNullOrEmpty(characters)) return EmptyCharacters(collector);
+            // Todo: implement other checks
+            
+            if (!DeletionStackIsEmpty()) { return InsertInsideDelete(collector); }
 
             // Todo: implement other checks
+            throw new NotImplementedException();
 
             return Valid();
         }
@@ -122,7 +127,7 @@ namespace WaveNET.Core.Model.Document.Operation.Automaton
         private ValidationResult MissingRetainToEnd(ViolationCollector v, int expectedLength, int actualLength)
         {
             return AddViolation(v, InvalidOperation("operation shorter than document, document length "
-                + expectedLength + ", length of input of operation " + actualLength));
+                                                    + expectedLength + ", length of input of operation " + actualLength));
         }
 
         private ValidationResult RetainInsideInsertOrDelete(ViolationCollector v)
@@ -137,8 +142,14 @@ namespace WaveNET.Core.Model.Document.Operation.Automaton
             {
                 return RetainItemCountNotPositive(v);
             }
-            if (!InsertionStackIsEmpty()) { return RetainInsideInsertOrDelete(v); }
-            if (!DeletionStackIsEmpty()) { return RetainInsideInsertOrDelete(v); }
+            if (!InsertionStackIsEmpty())
+            {
+                return RetainInsideInsertOrDelete(v);
+            }
+            if (!DeletionStackIsEmpty())
+            {
+                return RetainInsideInsertOrDelete(v);
+            }
             //// validity
             if (!CanRetain(itemCount))
             {
@@ -193,15 +204,15 @@ namespace WaveNET.Core.Model.Document.Operation.Automaton
         }
 
         /// <summary>
-        /// Checks whether the automaton is in an accepting state, i.e., whether the
-        /// operation would be valid if no further operation components follow.
+        ///     Checks whether the automaton is in an accepting state, i.e., whether the
+        ///     operation would be valid if no further operation components follow.
         /// </summary>
         public ValidationResult CheckFinish(ViolationCollector v)
         {
             // well-formedness
             if (!InsertionStackIsEmpty())
             {
-                foreach (var e in _insertionStack)
+                foreach (InsertStart e in _insertionStack)
                 {
                     return e.NotClosed(this, v);
                 }
@@ -233,6 +244,29 @@ namespace WaveNET.Core.Model.Document.Operation.Automaton
             return _deletionStackDepth == 0;
         }
 
+        public ValidationResult CheckElementStart(string type, IAttributes attributes, ViolationCollector collector)
+        {
+            // Well-formedness
+            if (type == null)
+            {
+                return NullTag(collector);
+            }
+
+            if (!DeletionStackIsEmpty()) { return InsertInsideDelete(collector); }
+
+            throw new NotImplementedException();
+        }
+
+        private ValidationResult NullTag(ViolationCollector collector)
+        {
+            return AddViolation(collector, IllFormedOperation("element type is null"));
+        }
+
+        private ValidationResult InsertInsideDelete(ViolationCollector v)
+        {
+            return AddViolation(v, IllFormedOperation("insertion inside deletion"));
+        }
+
         private class InsertStart
         {
             private readonly string _tag;
@@ -252,6 +286,20 @@ namespace WaveNET.Core.Model.Document.Operation.Automaton
             {
                 return automaton.MismatchedInsertStart(collector);
             }
+        }
+
+        public void DoElementStart(string type, IAttributes attributes)
+        {
+            throw new NotImplementedException();
+            //if (EXPENSIVE_ASSERTIONS)
+            //{
+            //    Debug.Assert(CheckElementStart(type, attributes, null) != ValidationResult.IllFormed);
+            //}
+            //UpdateDeletionTargetAnnotations();
+            //InsertionStackPush(InsertStart.GetInstance(type));
+            //NextRequiredElement = RequiredFirstChild(type);
+            //_resultingPos += 1;
+            //_afterAnnotationBoundary = false;
         }
     }
 }

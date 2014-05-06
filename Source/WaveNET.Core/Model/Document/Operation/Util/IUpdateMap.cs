@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WaveNET.Core.Model.Document.Operation.Util
+﻿namespace WaveNET.Core.Model.Document.Operation.Util
 {
     /// <summary>
     ///     Defines a reversible change on a map.
@@ -8,8 +6,11 @@ namespace WaveNET.Core.Model.Document.Operation.Util
     public interface IUpdateMap
     {
         int ChangeSize();
-        String GetChangeKey(int changeIndex);
-        String GetOldValue(int changeIndex);
-        String GetNewValue(int changeIndex);
+
+        string GetChangeKey(int changeIndex);
+
+        string GetOldValue(int changeIndex);
+
+        string GetNewValue(int changeIndex);
     }
 }

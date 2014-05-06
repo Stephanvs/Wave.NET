@@ -137,6 +137,8 @@
     <Compile Include="Model\Document\Operation\OpComparators.cs" />
     <Compile Include="Model\Document\Operation\OperationComponents.cs" />
     <Compile Include="Model\Document\Operation\UncheckedDocOpBuffer.cs" />
+    <Compile Include="Model\Document\Operation\Util\AttributeUpdate.cs" />
+    <Compile Include="Model\Document\Operation\Util\ImmutableUpdateMap.cs" />
     <Compile Include="Model\Document\Operation\Util\IStateMap.cs" />
     <Compile Include="Model\Document\Operation\Util\IUpdateMap.cs" />
     <Compile Include="Model\Document\Operation\Validation\DocOpValidator.cs" />

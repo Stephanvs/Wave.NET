@@ -1,5 +1,9 @@
 ﻿namespace WaveNET.Core.Model.Document.Operation.Automaton
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>Contained within DocOpValidator class in java source</remarks>
     public class ValidationDocOpCursor
         : IDocOpCursor
     {
@@ -37,7 +41,9 @@
 
         public void ElementStart(string type, IAttributes attributes)
         {
-            throw new System.NotImplementedException();
+            _accu[0] = _accu[0].MergeWith(_automaton.CheckElementStart(type, attributes, _collector));
+            AbortIfIllFormed();
+            _automaton.DoElementStart(type, attributes);
         }
 
         public void ElementEnd()

@@ -41,7 +41,7 @@ namespace WaveNET.Core.Utils
         ///     hotspot).
         /// </remarks>
         /// <param name="errorMessage"></param>
-        public static void InvalidOperation(string errorMessage)
+        public static void IllegalState(string errorMessage)
         {
             throw new InvalidOperationException(errorMessage);
         }

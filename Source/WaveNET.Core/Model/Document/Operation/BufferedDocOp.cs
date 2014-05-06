@@ -145,16 +145,19 @@ namespace WaveNET.Core.Model.Document.Operation
             return new BufferedDocOp(components);
         }
 
+        /// <summary>
+        /// Checks that a buffered doc op is well-formed.
+        /// </summary>
+        /// <param name="value">value op to check</param>
+        /// <exception cref="InvalidOperationException">if the op is ill-formed</exception>
         private static void CheckWellformedness(IBufferedDocOp value)
         {
             if (!DocOpValidator.IsWellformed(null, value))
             {
                 // Check again, collecting violations this time.
                 var violationCollector = new ViolationCollector();
-
                 DocOpValidator.IsWellformed(violationCollector, value);
-
-                Preconditions.InvalidOperation(
+                Preconditions.IllegalState(
                     string.Format("Attempt to build ill-formed operation ({0}): {1}", violationCollector, value));
             }
         }

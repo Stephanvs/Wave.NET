@@ -1,27 +1,17 @@
-﻿namespace WaveNET.Core.Model.Document.Operation
+﻿using System.Collections.Generic;
+using System.Linq;
+using WaveNET.Core.Model.Document.Operation.Util;
+
+namespace WaveNET.Core.Model.Document.Operation
 {
     public class AnnotationsUpdate
-        : IAnnotationsUpdate
+        : ImmutableUpdateMap<AnnotationsUpdate, IAnnotationsUpdate>
+        , IAnnotationsUpdate
     {
-        public int ChangeSize()
-        {
-            throw new System.NotImplementedException();
-        }
+        public AnnotationsUpdate() { }
 
-        public string GetChangeKey(int changeIndex)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public string GetOldValue(int changeIndex)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public string GetNewValue(int changeIndex)
-        {
-            throw new System.NotImplementedException();
-        }
+        private AnnotationsUpdate(IList<AttributeUpdate> updates) 
+            : base(updates) { }
 
         public IAnnotationsUpdate ComposeWith(IAnnotationsUpdate mutation)
         {
